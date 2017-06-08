@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="Moviesta">
 <head>
-    <meta charset="UTF-8">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Moviesta</title>
+
+    <!--external links-->
+    <script src="vendors/angular/angular.min.js"></script>
+    <script src="vendors/angular/angular-route.min.js"></script>
+    <script src="vendors/jquery/jquery.min.js"></script>
+    <script src="vendors/jquery/jquery-ui.min.js"></script>
+    <script src="vendors/jquery/jquery.ui.touch-punch.min.js"></script>
+
+    <!--Bootstrap-->
+    <!-- Bootstrap core CSS -->
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="vendors/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script>window.jQuery || document.write('<script src="vendors/jquery/jquery.min.js"><\/script>')</script>
+    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!--css file-->
+    <link href="css/style.css" rel="stylesheet">
+    <!------------------------------app requirements-------------------------------------------->
+    <!--declare app-->
+    <script src="app.js"></script>
+    <!--confid file-->
+    <script src="config.js"></script>
+
+
 </head>
-<body>
-<h1>hello!!</h1>
+
+<body ng-view>
+
 </body>
 </html>

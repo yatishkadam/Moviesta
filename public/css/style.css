@@ -1,0 +1,145 @@
+input.form-control {
+    margin-bottom: 5px;
+}
+
+body {
+    padding-top: 56px;
+    padding-bottom: 56px;
+}
+
+.colorgraph {
+    height: 1px;
+    border-top: 0;
+    background: green;
+    border-radius: 5px;
+}
+
+.card-container.card {
+    margin-top: 40px;
+    max-width: 75%;
+    padding-top: 35px;
+    padding-bottom: 30px;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+.card-container1.card {
+    margin-top: 10px;
+    padding-top: 35px;
+    padding-bottom: 30px;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+.card-container2.card{
+    padding: 15px;
+}
+.wd-widget > .wd-widget-toolbar{
+    position: absolute;
+    right: 30px;
+    background:white;
+    opacity: 0.9;
+    padding: 5px;
+    border-bottom-left-radius: 10px;
+}
+.wd-widget-toolbar1{
+    position: absolute;
+    right: 0px;
+    background:white;
+    opacity: 0.9;
+    padding: 5px;
+    border-bottom-left-radius: 10px;
+}
+.wd-widget{
+    margin-bottom: 10px;
+}
+.wd-widget > img{
+    width:100%;
+}
+
+.gly-right{
+    margin-right: 15px;
+}
+/*
+ * Card component
+ */
+.card {
+    background-color: #F7F7F7;
+    /* just in case there no content*/
+    padding: 2px 2px 3px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 5px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.listov{
+    height:300px;
+    overflow:hidden;
+    overflow-y:scroll;
+}
+.listov1{
+    height:350px;
+    overflow:hidden;
+    overflow-y:scroll;
+}
+
+
+/*
+*Register page
+ */
+.alreadyacc{
+    margin-right: 2px;
+}
+
+
+
+
+
+/*
+custom navbar
+ */
+.navbar-custom {
+    background-color:#2F3030;
+    border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:#fff;
+}
+
+.navbar-custom .navbar-nav > .active > a {
+    color: #ffffff;
+    background-color:transparent;
+}
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .navbar-brand:focus {
+    color: grey;
+}
+.navbar-custom .navbar-nav > li > a:hover,
+.navbar-custom .navbar-nav > li > a:focus,
+.navbar-custom .navbar-nav > .active > a:hover,
+.navbar-custom .navbar-nav > .active > a:focus,
+.navbar-custom .navbar-nav > .open >a {
+    text-decoration: none;
+    background-color: #1C1D1D;
+    color: grey;
+}
+
+.navbar-custom .navbar-brand {
+    color:#eeeeee;
+}
+.navbar-custom .navbar-toggle {
+    background-color:black;
+}
+.navbar-custom .icon-bar {
+    background-color:white;
+}
+
+/*
+custom navbar ends
+ */
