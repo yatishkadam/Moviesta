@@ -9,10 +9,16 @@
             </button>
             <a class="navbar-brand" href="#!/">Moviesta</a>
         </div>
+        <div id="searchbar" class="col-sm-3 col-md-5 hidden-xs" style="padding-top: 10px">
+        <form ng-submit="submit()" class="ng-pristine ng-valid">
+            <input type="text" ng-model="query" class="form-control ng-pristine ng-valid ng-touched" name="query" placeholder="Search...">
+        </form>
+        </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="#!/"> TRAILERS</a></li>
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="#!/movies/trailers"> TRAILERS</a></li>
             </ul>
+
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#!/" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-phone"></span> Contact</a></li>
                 <li><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -76,38 +82,64 @@
 
 <div class="container-fluid">
     <div class="row">
-        <h2 class="text-center">Trailers</h2>
-        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-4">
-            <div class="card card-container">
-                <img src="../../images/wall1.jpg" alt="image" style="width:100%">
-                <div class="container" style="padding-top: 25px">
-                    <a href="" class="pull-left">name</a>
-                    <a href="" style="margin-left: 24%"><span class="glyphicon glyphicon-heart">rating</span></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-4">
-            <div class="card card-container">
-                <img src="../../images/wall2.jpg" alt="image" style="width:100%">
-                <div class="container" style="padding-top: 25px">
-                    <a href="" class="pull-left">name</a>
-                    <a href="" style="margin-left: 24%"><span class="glyphicon glyphicon-heart">rating</span></a>
+        <h2 class="text-center">New Movies</h2>
+        <div class="col-md-4 col-sm-4 col-lg-4 col-xs-4">
+            <div class="thumbnail">
+                <div class="embed-responsive embed-responsive-4by3">
+                    <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
+                    <!-- ngIf: !movie.video_url -->
+                    <a ng-if="!movie.video_url" href="" class="ng-scope">
+                        <img ng-src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg" src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg">                    </a><!-- end ngIf: !movie.video_url -->
 
                 </div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-4">
-            <div class="card card-container">
-                <img src="../../images/wall3.jpg" alt="image" style="width:100%">
-                <div class="container"style="padding-top: 25px">
-                    <a href="" class="pull-left">name</a>
-                    <a href="" style="margin-left: 24%"><span class="glyphicon glyphicon-heart">rating</span></a>
-
+                <div class=" btn btn-link text-center">POC</div>
+                <div>
+                    <span class="label label-success arrowed"> genre</span>
+                    <span class="label label-success arrowed"> genre</span>
+                    <span class="label label-success arrowed"> genre</span>
                 </div>
             </div>
         </div>
+        <div class="col-md-4 col-sm-4 col-lg-4 col-xs-4">
+            <div class="thumbnail">
+                <div class="embed-responsive embed-responsive-4by3">
+                    <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
+                    <!-- ngIf: !movie.video_url -->
+                    <a ng-if="!movie.video_url" href="" class="ng-scope">
+                        <img ng-src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg" src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg">                    </a><!-- end ngIf: !movie.video_url -->
+
+                </div>
+                <div class=" btn btn-link text-center">POC
+                </div>
+                <div>
+                    <span class="label label-success arrowed"> genre</span>
+                    <span class="label label-success arrowed"> genre</span>
+                    <span class="label label-success arrowed"> genre</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4 col-lg-4 col-xs-4">
+                <div class="thumbnail">
+                    <div class="embed-responsive embed-responsive-4by3">
+                        <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
+                        <!-- ngIf: !movie.video_url -->
+                        <a ng-if="!movie.video_url" href="" class="ng-scope">
+                            <img ng-src="https://image.tmdb.org/t/p/w500//gfJGlDaHuWimErCr5Ql0I8x9QSy.jpg" src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg">                    </a><!-- end ngIf: !movie.video_url -->
+
+                    </div>
+                    <div class=" btn btn-link text-center">POC</div>
+                    <div>
+                        <span class="label label-success arrowed"> genre</span>
+                        <span class="label label-success arrowed"> genre</span>
+                        <span class="label label-success arrowed"> genre</span>
+                    </div>
+            </div>
+        </div>
+
     </div>
 </div>
+
+
 
 </div>
 
@@ -130,9 +162,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 
 <nav class="navbar navbar-custom navbar-fixed-bottom">

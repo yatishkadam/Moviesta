@@ -22,9 +22,15 @@
             controllerAs: 'model'
             })
             .when('/profile',{
-            templateUrl : 'views/user/profile.view.client.html',
-            controller  : 'profileController',
-            controllerAs: 'model'
+                templateUrl : 'views/user/profile.view.client.html',
+                controller  : 'profileController',
+                controllerAs: 'model'
+            })
+            .when('/movies/trailers',{
+                templateUrl : 'views/movie/trailers/trailers.view.client.html'
+            })
+            .when('/movies/:movieId',{
+                templateUrl:'views/movie/moviePage/movie-page.view.client.html'
             });
 
 

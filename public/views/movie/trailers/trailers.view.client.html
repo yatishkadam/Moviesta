@@ -1,0 +1,124 @@
+<nav class="navbar navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#!/">Moviesta</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <div id="searchbar" class="col-sm-3 col-md-5" style="padding-top: 10px">
+                <form ng-submit="submit()" class="ng-pristine ng-valid">
+                    <input type="text" ng-model="query" class="form-control ng-pristine ng-valid ng-touched" name="query" placeholder="Search...">
+                </form>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="#!/register"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
+            </ul>
+
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+
+
+
+<div class="container-fluid">
+    <h3 class="text-center">TRAILERS</h3>
+    <hr class="colorgraph">
+    <h4>Upcoming</h4>
+    <div class="row">
+
+        <div class="col-lg-4 col-md-6">
+            <div class="thumbnail">
+                <div class="embed-responsive embed-responsive-4by3">
+                    <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
+                    <!-- ngIf: !movie.video_url -->
+                    <a ng-if="!movie.video_url" href="#!/movies/2134" class="ng-scope">
+                        <img ng-src="https://image.tmdb.org/t/p/w500//gfJGlDaHuWimErCr5Ql0I8x9QSy.jpg" src="https://image.tmdb.org/t/p/w500//gfJGlDaHuWimErCr5Ql0I8x9QSy.jpg">
+                    </a><!-- end ngIf: !movie.video_url -->
+
+                </div>
+                <div class=" btn btn-link text-center">Wonder Woman</div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="thumbnail">
+                <div class="embed-responsive embed-responsive-4by3">
+                    <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
+                    <!-- ngIf: !movie.video_url -->
+                    <a ng-if="!movie.video_url" href="" class="ng-scope">
+                        <img ng-src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg" src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg">                    </a><!-- end ngIf: !movie.video_url -->
+
+                </div>
+                <div class=" btn btn-link text-center">POC</div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="thumbnail">
+                <div class="embed-responsive embed-responsive-4by3">
+                    <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
+                    <!-- ngIf: !movie.video_url -->
+                    <a ng-if="!movie.video_url" href="" class="ng-scope">
+                        <img ng-src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg" src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg">                    </a><!-- end ngIf: !movie.video_url -->
+
+                </div>
+                <div class=" btn btn-link text-center">POC</div>
+            </div>
+        </div>
+    </div>
+
+
+    <h4>New Movies</h4>
+    <div class="row">
+
+        <div class="col-lg-4 col-md-6">
+            <div class="thumbnail">
+                <div class="embed-responsive embed-responsive-4by3">
+                    <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
+                    <!-- ngIf: !movie.video_url -->
+                    <a ng-if="!movie.video_url" href="" class="ng-scope">
+                        <img ng-src="https://image.tmdb.org/t/p/w500//gfJGlDaHuWimErCr5Ql0I8x9QSy.jpg" src="https://image.tmdb.org/t/p/w500//gfJGlDaHuWimErCr5Ql0I8x9QSy.jpg">
+                    </a><!-- end ngIf: !movie.video_url -->
+
+                </div>
+                <div class=" btn btn-link text-center">Wonder Woman</div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="thumbnail">
+                <div class="embed-responsive embed-responsive-4by3">
+                    <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
+                    <!-- ngIf: !movie.video_url -->
+                    <a ng-if="!movie.video_url" href="" class="ng-scope">
+                        <img ng-src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg" src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg">                    </a><!-- end ngIf: !movie.video_url -->
+
+                </div>
+                <div class=" btn btn-link text-center">POC</div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="thumbnail">
+                <div class="embed-responsive embed-responsive-4by3">
+                    <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
+                    <!-- ngIf: !movie.video_url -->
+                    <a ng-if="!movie.video_url" href="" class="ng-scope">
+                        <img ng-src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg" src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg">                    </a><!-- end ngIf: !movie.video_url -->
+
+                </div>
+                <div class=" btn btn-link text-center">POC</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<nav class="navbar navbar-custom navbar-fixed-bottom">
+    <div class="container-fluid">
+    </div>
+</nav>

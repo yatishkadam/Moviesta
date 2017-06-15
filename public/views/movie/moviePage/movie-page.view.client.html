@@ -1,0 +1,138 @@
+<nav class="navbar navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#!/">Moviesta</a>
+        </div>
+        <div id="searchbar" class="col-sm-3 col-md-5 hidden-xs" style="padding-top: 10px">
+            <form ng-submit="submit()" class="ng-pristine ng-valid">
+                <input type="text" ng-model="query" class="form-control ng-pristine ng-valid ng-touched" name="query" placeholder="Search...">
+            </form>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="#!/movies/trailers"> TRAILERS</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-phone"></span> Contact</a></li>
+                <li><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="#!/register"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
+            </ul>
+
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-6">
+            <div class="profile">
+                <img class="img img-responsive" ng-src="https://image.tmdb.org/t/p/w500//gfJGlDaHuWimErCr5Ql0I8x9QSy.jpg" src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg">
+            </div>
+        </div>
+        <div class="col-lg-8 col-sm-8 col-md-8 col-xs-6">
+            <h3>Wonder Woman</h3>
+            <hr class="colorgraph">
+            <h4>Plot</h4>
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div>
+                        <span class="label label-success arrowed"> genre</span>
+                        <span class="label label-success arrowed"> genre</span>
+                        <span class="label label-success arrowed"> genre</span>
+                    </div>
+                    <br>
+                    <br>
+                    <div>
+                        <div class="glyphicon glyphicon-time"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <h4>IMDB Rating</h4>
+                    <span class="glyphicon glyphicon-heart"></span>
+                    <h4>User Rating</h4>
+                    <span class="glyphicon glyphicon-heart"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <h3>CAST</h3>
+    <hr class="colorgraph">
+    <div class="row">
+        <ul >
+            <li class="title">
+                <figure>
+                    <a href="#/cast/90633">
+                        <img ng-src="https://image.tmdb.org/t/p/w92/xu1l9WmNY1XYZyJ3M2gvGqCCDGS.jpg" src="https://image.tmdb.org/t/p/w92/xu1l9WmNY1XYZyJ3M2gvGqCCDGS.jpg">
+                    </a>
+                    <figcaption>
+                        <a class="ng-binding" href="#/cast/90633">Gal Gadot</a>
+                    </figcaption>
+                </figure>
+            </li>
+            <li class="title">
+                <figure>
+                    <a href="#/cast/90633">
+                        <img ng-src="https://image.tmdb.org/t/p/w92/1YhN379UKCPt94nbLzncsDHTC9T.jpg" src="https://image.tmdb.org/t/p/w92/1YhN379UKCPt94nbLzncsDHTC9T.jpg">
+                    </a>
+                    <figcaption>
+                        <a class="ng-binding" href="#/cast/90633">Gal Gadot</a>
+                    </figcaption>
+                </figure>
+            </li>
+            <li class="title">
+                <figure>
+                    <a href="#/cast/90633">
+                        <img ng-src="https://image.tmdb.org/t/p/w92/vSe6sIsdtcoqBhuWRXynahFg8Vf.jpg" src="https://image.tmdb.org/t/p/w92/vSe6sIsdtcoqBhuWRXynahFg8Vf.jpg">
+                    </a>
+                    <figcaption>
+                        <a class="ng-binding" href="#/cast/90633">Gal Gadot</a>
+                    </figcaption>
+                </figure>
+            </li>
+            <li class="title">
+                <figure>
+                    <a href="#/cast/90633">
+                        <img ng-src="https://image.tmdb.org/t/p/w92/cke0NNZP4lHRtOethRy2XGSOp3E.jpg" src="https://image.tmdb.org/t/p/w92/cke0NNZP4lHRtOethRy2XGSOp3E.jpg">
+                    </a>
+                    <figcaption>
+                        <a class="ng-binding" href="#/cast/90633">Gal Gadot</a>
+                    </figcaption>
+                </figure>
+            </li>
+        </ul>
+    </div>
+    <br>
+    <div class="row">
+        <h3>CRITIC REVIEWS</h3>
+        <hr class="colorgraph">
+        <p></p>
+    </div>
+    <br>
+    <div class="row">
+        <h3>USER REVIEWS</h3>
+        <hr class="colorgraph">
+        <p></p>
+    </div>
+</div>
+
+
+
+
+
+
+
+<nav class="navbar navbar-custom navbar-fixed-bottom">
+    <div class="container-fluid">
+    </div>
+</nav>

@@ -157,3 +157,73 @@ custom navbar ends
     width: 100%;
     height: 350px;
 }
+
+
+
+/*
+labels as arrows*/
+.label {
+    border-radius: 0;
+    text-shadow: none;
+    font-size: 11px;
+    font-weight: normal;
+    padding: 3px 5px 3px;
+    background-color: #abbac3!important
+}
+.label[class*="span"][class*="arrow"] { min-height: 0 }
+
+
+.label.arrowed,
+.label.arrowed-in { position: relative; margin-left: 9px }
+.label.arrowed:before,
+.label.arrowed-in:before {
+    display: inline-block;
+    content: "";
+    position: absolute;
+    left: -14px; top: 0;
+    border: 9px solid transparent;
+    border-width: 9px 7px;
+    border-right-color: #abbac3
+}
+.label.arrowed-in:before {
+    border-color: #abbac3;
+    border-left-color: transparent!important;
+    left: -9px
+}
+.label.arrowed-right,
+.label.arrowed-in-right {
+    position: relative;
+    margin-right: 9px }
+.label.arrowed-right:after,
+.label.arrowed-in-right:after {
+    display: inline-block;
+    content: ""; position: absolute;
+    right: -14px; top: 0;
+    border: 9px solid transparent;
+    border-width: 9px 7px;
+    border-left-color: #abbac3
+}
+.label.arrowed-in-right:after {
+    border-color: #abbac3;
+    border-right-color: transparent!important;
+    right: -9px }
+
+
+/**/
+.thumbnail{
+    background-color: #D9DFDF;
+}
+
+/*image in the profile*/
+
+
+/*glyphicon time */
+.glyphicon.glyphicon-time {
+    font-size: 60px;
+}
+
+
+/*cast names and shizz*/
+.title{
+    display: inline-block;
+}
