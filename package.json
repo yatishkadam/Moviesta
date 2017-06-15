@@ -4,6 +4,7 @@
   "description": "WebDev Project summer 2017, Northeastern University",
   "main": "server.js",
   "dependencies": {
+    "angular-ui-carousel": "^0.1.9",
     "body-parser": "^1.17.2",
     "express": "^4.15.3"
   },

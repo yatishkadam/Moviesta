@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module("Moviesta",['ngRoute']);
+        .module("Moviesta",['ngRoute','ui.carousel']);
 })();

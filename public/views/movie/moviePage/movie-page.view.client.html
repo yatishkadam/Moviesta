@@ -31,12 +31,12 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-6">
+        <div class="col-lg-4 col-sm-4 col-md-4">
             <div class="profile">
                 <img class="img img-responsive" ng-src="https://image.tmdb.org/t/p/w500//gfJGlDaHuWimErCr5Ql0I8x9QSy.jpg" src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg">
             </div>
         </div>
-        <div class="col-lg-8 col-sm-8 col-md-8 col-xs-6">
+        <div class="col-lg-8 col-sm-8 col-md-8">
             <h3>Wonder Woman</h3>
             <hr class="colorgraph">
             <h4>Plot</h4>
@@ -114,17 +114,107 @@
     </div>
     <br>
     <div class="row">
-        <h3>CRITIC REVIEWS</h3>
-        <hr class="colorgraph">
-        <p></p>
+        <div class="col-lg-7 col-md-7">
+            <h3>CRITIC REVIEWS</h3>
+            <hr class="colorgraph">
+            <p></p>
+        </div>
+        <div class="col-lg-5 col-md-5">
+            <h3>USER REVIEWS</h3>
+            <hr class="colorgraph">
+
+            <div class="container-fluid">
+                <textarea class="col-xs-12" rows="6">
+                </textarea>
+                <button class="btn btn-primary btn-block btn-sm">Submit Review</button>
+            </div>
+        </div>
     </div>
-    <br>
-    <div class="row">
-        <h3>USER REVIEWS</h3>
-        <hr class="colorgraph">
-        <p></p>
+    <div class="container-fluid">
+        <div class="row">
+            <h3>Related Movies</h3>
+            <hr class="colorgraph">
+        </div>
     </div>
-</div>
+        <ui-carousel
+                slides="ctrl.slides"
+                slides-to-show="3"
+                slides-to-scroll="1"
+                on-init="ctrl.onCarouselInit()"
+                on-before-change="ctrl.onCarouselBeforeChange()"
+                on-after-change="ctrl.onCarouselAfterChange()">
+
+            <!-- For slider render -->
+            <carousel-item>
+                    <div class="thumbnail">
+                        <div class="embed-responsive embed-responsive-4by3">
+                            <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
+                            <!-- ngIf: !movie.video_url -->
+                            <a ng-if="!movie.video_url" href="" class="ng-scope">
+                                <img ng-src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg" src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg">                    </a><!-- end ngIf: !movie.video_url -->
+
+                        </div>
+                        <div class=" btn btn-link text-center">POC</div>
+                        <div>
+                            <span class="label label-success arrowed"> genre</span>
+                            <span class="label label-success arrowed"> genre</span>
+                            <span class="label label-success arrowed"> genre</span>
+                        </div>
+                    </div>
+            </carousel-item>
+        <carausel-item>
+                    <div class="thumbnail">
+                        <div class="embed-responsive embed-responsive-4by3">
+                            <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
+                            <!-- ngIf: !movie.video_url -->
+                            <a ng-if="!movie.video_url" href="" class="ng-scope">
+                                <img ng-src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg" src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg">                    </a><!-- end ngIf: !movie.video_url -->
+
+                        </div>
+                        <div class=" btn btn-link text-center">POC
+                        </div>
+                        <div>
+                            <span class="label label-success arrowed"> genre</span>
+                            <span class="label label-success arrowed"> genre</span>
+                            <span class="label label-success arrowed"> genre</span>
+                        </div>
+                    </div>
+        </carausel-item>
+            <carausel-item>
+                    <div class="thumbnail">
+                        <div class="embed-responsive embed-responsive-4by3">
+                            <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
+                            <!-- ngIf: !movie.video_url -->
+                            <a ng-if="!movie.video_url" href="" class="ng-scope">
+                                <img ng-src="https://image.tmdb.org/t/p/w500//gfJGlDaHuWimErCr5Ql0I8x9QSy.jpg" src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg">                    </a><!-- end ngIf: !movie.video_url -->
+
+                        </div>
+                        <div class=" btn btn-link text-center">POC</div>
+                        <div>
+                            <span class="label label-success arrowed"> genre</span>
+                            <span class="label label-success arrowed"> genre</span>
+                            <span class="label label-success arrowed"> genre</span>
+                        </div>
+                    </div>
+            </carausel-item>
+
+
+            <!-- For customize carousel next, previous button -->
+            <carousel-prev>
+                <!-- placed your previous button here -->
+                <button>Prev</button>
+                <!-- end -->
+            </carousel-prev>
+
+            <carousel-next>
+                <!-- placed your next button here -->
+                <button>Next</button>
+                <!-- end -->
+            </carousel-next>
+
+        </ui-carousel>
+
+    </div>
 
 
 

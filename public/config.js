@@ -30,7 +30,9 @@
                 templateUrl : 'views/movie/trailers/trailers.view.client.html'
             })
             .when('/movies/:movieId',{
-                templateUrl:'views/movie/moviePage/movie-page.view.client.html'
+                templateUrl :'views/movie/moviePage/movie-page.view.client.html',
+                controller  :'moviePageController',
+                controllerAs: 'model'
             });
 
 
