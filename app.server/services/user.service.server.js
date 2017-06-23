@@ -20,7 +20,7 @@ app.post   ("/api/register",register);
 app.get    ("/auth/google",passport.authenticate('google',{scope:['profile','email']}));
 app.get('/auth/google/callback',
     passport.authenticate('google', {
-        successRedirect: '/index.html#!/',
+        successRedirect: '/#/',
         failureRedirect: '/#/login'
     }));
 
