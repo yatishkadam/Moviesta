@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("WAM")
+        .module("Moviesta")
         .controller('loginController',loginController);
 
     function loginController($location,userService) {
@@ -9,14 +9,14 @@
 
         function login(username,password) {
             userService
-                .findUserByCredentials(username,password)
+                .login(username,password)
                 .then(validLogin,error);
 
 
             //if the user is valid
             function validLogin(found) {
                 if (found !== null) {
-                    $location.url("/user/" + found._id);
+                    $location.url("/profile");
                 }
             }
             //if the user is not valid

@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("WAM")
+        .module("Moviesta")
         .controller("registerController",registerController);
 
     function registerController($location,userService) {
@@ -37,11 +37,11 @@
 
                 //to create user
                 userService
-                    .createUser(newUser)
+                    .register(newUser)
                     .then(renderUser);
                 //change location after create user
-                function renderUser(user) {
-                    $location.url('/user/'+user._id);
+                function renderUser() {
+                    $location.url('/profile');
                 }
             }
         }

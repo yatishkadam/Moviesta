@@ -24,7 +24,10 @@
             .when('/profile',{
                 templateUrl : 'views/user/profile.view.client.html',
                 controller  : 'profileController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve:{
+                    currentUser:checkLoggedIn
+                }
             })
             .when('/movies/trailers',{
                 templateUrl : 'views/movie/trailers/trailers.view.client.html'
@@ -33,9 +36,43 @@
                 templateUrl :'views/movie/moviePage/movie-page.view.client.html',
                 controller  :'moviePageController',
                 controllerAs: 'model'
+            })
+            .when('/cast/:castId',{
+                templateUrl :'views/movie/cast/cast.view.client.html'
             });
 
 
+
+        function checkLoggedIn(userService,$q,$location) {
+            var deferred=$q.defer();
+            userService
+                .loggedin()
+                .then(function (user) {
+                    if (user==='0') {
+                        deferred.reject();
+                        $location.url('/login');
+                    }
+                    else{
+                        deferred.resolve(user);
+                    }
+                });
+            return deferred.promise;
+        }
+        function checkCurrentUser(userService,$q,$location) {
+            var deferred=$q.defer();
+            userService
+                .loggedin()
+                .then(function (user) {
+                    if (user==='0') {
+                        deferred.resolve({});
+                        //$location.url('/login');
+                    }
+                    else{
+                        deferred.resolve(user);
+                    }
+                });
+            return deferred.promise;
+        }
 
     }
 })();
