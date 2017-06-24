@@ -1,6 +1,7 @@
 var mongoose=require('mongoose');
 var userSchema= require("./user.schema.sever");
 var userModel=mongoose.model("userModel",userSchema);
+var followModel=require("../follow/follow.model.server");
 var bcrypt = require("bcrypt-nodejs");
 userModel.createUser=createUser;
 userModel.findUserById=findUserById;
@@ -70,14 +71,15 @@ function updateUser(userId,newUser) {
 
 //delete user
 function deleteUser(userId) {
-    return userModel.findById(userId)
-        .then(function (user) {
-            cleanup(user)
-                .then(function () {
-                    return userModel.remove({_id:userId});
+    return followModel.deleteFollowing(userId)
+        .then(function (status) {
+            //console.log("_____deleteUser_______/model/__");
+            userModel.findById(userId)
+                .then(function (user) {
+                    //console.log(user);
+                    return userModel.remove({_id: user._id});
                 });
         });
-
 }
 
 

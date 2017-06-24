@@ -8,6 +8,7 @@ app.delete ("/api/delete/:movieId",deleteMovie);
 app.put    ("/api/movie/:movieId",updateMovie);
 app.get    ("/api/movie/genre/:genre",findMovieOnGenre);
 app.get    ("/api/movie/:movieId",findMovieById);
+app.get    ("/api/getRating/:movieId",getMovieRating);
 
 
 function createMovie(req,res) {
@@ -53,6 +54,16 @@ function findMovieOnGenre(req,res) {
            res.json(response);
         });
 }
+
+function getMovieRating(req,res) {
+    var tmdbId=req.params.movieId;
+    movieModel.getMovieRating(tmdbId)
+        .then(function (response) {
+            //console.log(response);
+            res.json(response);
+        });
+}
+
 
 function findAllMovies(req,res) {
     //console.log("____________findAllMovies_________");

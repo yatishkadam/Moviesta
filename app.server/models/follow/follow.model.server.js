@@ -5,7 +5,11 @@ var followModel = mongoose.model("followModel",followSchema);
 
 followModel.createFollow=createFollow;
 followModel.deleteFollow=deleteFollow;
+followModel.findAllFollowing=findAllFollowing;
+followModel.findAllFollowers=findAllFollowers;
+followModel.deleteFollowing=deleteFollowing;
 module.exports = followModel;
+
 
 //crud operations
 
@@ -32,5 +36,33 @@ function deleteFollow(follower,following) {
                 });
         });
 }
+
+//find followers
+function findAllFollowers(followerId) {
+    //console.log(followerId);
+    return followModel.find({following:followerId});
+}
+
+//find following
+
+function findAllFollowing(userId) {
+    return followModel.find({follower:userId});
+}
+
+//delete following when user deletes profile
+function deleteFollowing(userId) {
+    return followModel.find({follower:userId})
+        .then(function (followlist) {
+            followModel.find({following:userId})
+                .then(function (list) {
+                    Array.prototype.push.apply(followlist,list);
+                    for (var v in followlist){
+                        deleteFollow(followlist[v].follower,followlist[v].following);
+                        deleteFollow(followlist[v].following,followlist[v].follower);
+                    }
+        });
+});
+}
+
 
 

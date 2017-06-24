@@ -32,6 +32,5 @@ db.once('open',function () {
 mongoose.Promise= require("q").Promise;
 
 require("./services/user.service.server");
-require("./services/cast.service.server");
 require("./services/review.service.server");
 require("./services/movie.service.server");

@@ -6,8 +6,9 @@ var reviewSchema = mongoose.Schema({
     title:String,
     rating:Number,
     content:String,
-    upVotes:Number,
-    downVotes:Number
+    upVotes:{type:Number,default:0},
+    downVotes:{type:Number,default:0},
+    tally:{type:Number,default:0}
 },{collection:"review"});
 
 module.exports = reviewSchema;

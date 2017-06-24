@@ -9,6 +9,8 @@ app.get   ("/api/getReviewByMovieId/:movieId",getReviewByMovieId);
 app.get   ("/api/getReviewByUserId/:userId",getReviewByUserId);
 app.delete("/api/movie/:movieId/review/:reviewId",deleteReview);
 app.get   ("/api/review/:reviewId",findReview);
+app.put   ("/api/review/upvote/:reviewId",updateUpvote);
+app.put   ("/api/review/downvote/:reviewId",downVote);
 
 
 
@@ -71,6 +73,23 @@ function getReviewByMovieId(req,res) {
 function findReview(req,res) {
     var reviewId=req.params.reviewId;
     reviewModel.findReview(reviewId)
+        .then(function (response) {
+            res.json(response);
+        });
+}
+
+
+function updateUpvote(req,res) {
+    var reviewId=req.params.reviewId;
+    reviewModel.updateUpvote(reviewId)
+        .then(function (response) {
+            res.json(response);
+        });
+}
+
+function downVote(req,res) {
+    var reviewId=req.params.reviewId;
+    reviewModel.updateDownvote(reviewId)
         .then(function (response) {
             res.json(response);
         });

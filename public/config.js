@@ -37,6 +37,16 @@
                 controller  :'moviePageController',
                 controllerAs: 'model'
             })
+            .when('/movie/search/:title',{
+                templateUrl : 'views/movie/moviesearch/movie-search.view.client.html',
+                controller  : 'movieSearchController',
+                controllerAs: 'model'
+            })
+            .when('/genre/movies/:genreId/:genrename', {
+                templateUrl :'views/movie/moviesearch/movie-search.view.client.html',
+                controller  :'movieGenreController',
+                controllerAs:'model'
+            })
             .when('/cast/:castId',{
                 templateUrl :'views/movie/cast/cast.view.client.html'
             });

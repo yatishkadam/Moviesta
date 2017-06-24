@@ -27,7 +27,8 @@ app.get('/auth/google/callback',
 app.put    ("/api/user/:userId/follow/:followingId",follow);
 
 app.delete ("/api/user/:userId/unfollow/:followingId",unfollow);
-
+app.get    ("/api/getFollowers/:userId",getFollowers);
+app.get    ("/api/getFollowing/:userId",getFollowing);
 
 
 
@@ -120,6 +121,24 @@ function unfollow(req,res) {
                 res.sendStatus(404);
             });
 }
+//get all forllowers give userId
+function getFollowers(req,res) {
+    var userId = req.params.userId;
+    followModel.findAllFollowers(userId)
+        .then(function (response) {
+
+            res.json(response);
+        });
+}
+
+//get all following give
+function getFollowing(rea,res) {
+    var userId=req.params.userID;
+    followModel.findAllFollowing(userId)
+        .then(function (response) {
+            res.json(response);
+        });
+}
 
 function register(req, res) {
     var userObj = req.body;
@@ -165,9 +184,12 @@ function createUser(req,res) {
 //function to delete user
 function deleteUser(req,res) {
     var userId = req.params.userId;
+    console.log(userId);
     userModel.deleteUser(userId)
         .then(function (status) {
-            res.json(status);
+            console.log("_________end__________");
+            //console.log(status);
+            res.sendStatus(200);
         });
 }
 

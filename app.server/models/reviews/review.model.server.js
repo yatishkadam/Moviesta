@@ -10,6 +10,8 @@ reviewModel.findReview=findReview;
 reviewModel.findReviewByMovieId=findReviewByMovieId;
 reviewModel.findReviewByUserId=findReviewByUserId;
 reviewModel.findAllReviews=findAllReviews;
+reviewModel.updateDownvote=updateDownvote;
+reviewModel.updateUpvote=updateUpvote;
 module.exports= reviewModel;
 
 
@@ -18,13 +20,13 @@ module.exports= reviewModel;
 
 //create review
 function createReview(review){
-    console.log("_______inside create review/ model_______");
+    //console.log("_______inside create review/ model_______");
     return reviewModel.create(review)
         .then(function (review) {
-            console.log(review);
+            //console.log(review);
             movieModel.addReview(review.tmdbMovieId, review._id)
                 .then(function () {
-                    console.log("____AFTER ADD REVIEW CALL_____");
+                    //console.log("____AFTER ADD REVIEW CALL_____");
                 });
 
         });
@@ -58,4 +60,25 @@ function findReviewByUserId(userId) {
 //find all reviews
 function findAllReviews() {
     return reviewModel.find();
+}
+
+//update upvotes
+function updateUpvote(reviewId) {
+    return reviewModel.findOne({_id:reviewId})
+        .then(function (review) {
+            review.upVotes+=1;
+            review.tally=review.upVotes-review.downVotes;
+            return review.save();
+        });
+}
+
+
+//downvote upvotes
+function updateDownvote(reviewId) {
+    return reviewModel.findOne({_id:reviewId})
+        .then(function (review) {
+            review.downVotes+=1;
+            review.tally=review.upVotes-review.downVotes;
+            return review.save();
+        });
 }

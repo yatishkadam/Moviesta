@@ -9,6 +9,7 @@
         model.updateUser=updateUser;
         model.unregister=deleteUser;
         model.logout=logout;
+        model.searchMovieTMDB=searchMovieTMDB;
         function init() {
             renderUser(currentUser);
         }
@@ -57,6 +58,10 @@
                 .then(function () {
                     $location.url("/login");
                 });
+        }
+
+        function searchMovieTMDB(title) {
+            $location.url("/movie/search/"+title);
         }
     }
 

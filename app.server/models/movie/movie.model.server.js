@@ -11,6 +11,7 @@ movieModel.findMovieById=findMovieById;
 movieModel.updateRating=updateRating;
 movieModel.addReview=addReview;
 movieModel.removeReview=removeReview;
+movieModel.getMovieRating=getMovieRating;
 
 module.exports=movieModel;
 
@@ -76,4 +77,30 @@ function removeReview(movieId,reviewId) {
             movie.reviews.splice(index,1);
             return movie.save();
         });
+}
+
+
+function getMovieRating(movieId){
+    return populateReviews(movieId)
+        .then(function (movie) {
+            //console.log(movie);
+            var rating=0.0;
+            //console.log("_________reviews___________");
+            var list=movie.reviews;
+            //console.log(list);
+           list.forEach(function (v) {
+               //console.log(v);
+               //console.log(rating);
+               rating+=parseFloat(v.rating);
+           });
+           var len=list.length;
+            rating=rating/len;
+           return (rating);
+        });
+}
+
+function populateReviews(movieId) {
+    return movieModel.findOne({tmdbMovieId:movieId})
+        .populate("reviews")
+        .exec();
 }
