@@ -71,7 +71,7 @@
         }
         function cleanUp(movieList,genrelist) {
             var arrList=[];
-            console.log(movieList);
+            //console.log(movieList);
             for (var v in movieList){
                 //console.log(movieList[v]);
                 var newMovie={

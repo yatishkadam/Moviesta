@@ -3,9 +3,19 @@ input.form-control {
 }
 
 body {
+
     padding-top: 56px;
     padding-bottom: 56px;
 }
+
+@media (max-width: 768px){
+
+    body{
+        padding-top: 125px;
+    }
+
+}
+
 
 .colorgraph {
     height: 1px;
