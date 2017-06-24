@@ -38,6 +38,7 @@ var moviePage = "&page=PAGE";
 var movieVideos = "movie/MOVIEID/videos";
 var movieReviews = "movie/MOVIEID/reviews";
 var genre="genre/GENREID/movies";
+var currentMovies = "movie/now_playing";
 
 function findMovie(req,res) {
     var Title = req.params.movie;

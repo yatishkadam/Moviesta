@@ -13,6 +13,7 @@
             });
 
             getNewMovies();
+            getUpcomingMovies();
 
         }init();
 
@@ -30,7 +31,14 @@
                         //console.log(response);
                         //console.log(response.results);
                         model.TMDBmovies = response;
-                    
+
+                });
+        }
+
+        function getUpcomingMovies() {
+            movieService.getUpcomingMovies()
+                .then(function (response) {
+                    model.TMDBmoviesUpcoming=response;
                 });
         }
 

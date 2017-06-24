@@ -7,6 +7,7 @@
         this.getgenreTMDB=getgenreTMDB;
         this.findGenreTMDB=findGenreTMDB;
         this.getNewMovies=getNewMovies;
+        this.getUpcomingMovies=getUpcomingMovies;
 
         //find movie from tmdb
         function findMovieTMDB(title) {
@@ -47,6 +48,16 @@
                 });
         }
 
+        //function to get upcoming movies
+        function getUpcomingMovies() {
+            var url="/api/upcomingMovies";
+            return $http.get(url)
+                .then(function (response) {
+                    var data=response.data;
+                    return sendMovieList(data.results);
+                });
+        }
+
 
 
         //helper funtions
@@ -60,14 +71,15 @@
         }
         function cleanUp(movieList,genrelist) {
             var arrList=[];
+            console.log(movieList);
             for (var v in movieList){
-                //console.log(movieList);
                 //console.log(movieList[v]);
                 var newMovie={
                     id:movieList[v].id,
                     original_title:movieList[v].original_title,
                     title:movieList[v].title,
                     poster_path:movieList[v].poster_path,
+                    backdrop_path:movieList[v].backdrop_path,
                     genre_ids:getGenreType(movieList[v].genre_ids,genrelist),
                     release_date:movieList[v].release_date,
                     overview:movieList[v].overview,

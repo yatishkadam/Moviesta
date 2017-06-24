@@ -39,38 +39,15 @@
 
 
 <div class="container-fluid">
-    <div class="jumbotron">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
-                <div class="item active">
-                    <img src="../../images/wall3.jpg" alt="Image">
+                <div class="item" ng-class="{active:!$index}" ng-repeat="movie in model.TMDBmovies">
+                    <a href="#!/movies/{{movie.id}}" class="ng-scope">
+                        <img class="center-block" ng-src="https://image.tmdb.org/t/p/w780//{{movie.backdrop_path}}" src="https://image.tmdb.org/t/p/w780//{{movie.backdrop_path}}">
+                    </a>
                     <div class="carousel-caption">
-                        <h3>Los Angeles</h3>
-                        <p>LA is always so much fun!</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img src="../../images/wall1.jpg" alt="Image">
-                    <div class="carousel-caption">
-                        <h3>Chicago</h3>
-                        <p>Thank you, Chicago!</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img src="../../images/wall2.jpg" alt="Image">
-                    <div class="carousel-caption">
-                        <h3>New York</h3>
-                        <p>We love the Big Apple!</p>
+                        <h3>{{movie.title}}</h3>
                     </div>
                 </div>
             </div>
@@ -84,73 +61,69 @@
                 <span class="glyphicon glyphicon-chevron-right"></span>
                 <span class="sr-only">Next</span>
             </a>
-        </div>
 
     </div>
-
+</div>
 <div class="container-fluid">
-    <div class="row">
-        <h2 class="text-center">New Movies</h2>
-        <div class="col-md-4 col-sm-4 col-lg-4 col-xs-4">
-            <div class="thumbnail">
-                <div class="embed-responsive embed-responsive-4by3">
-                    <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
-                    <!-- ngIf: !movie.video_url -->
-                    <a ng-if="!movie.video_url" href="" class="ng-scope">
-                        <img ng-src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg" src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg">                    </a><!-- end ngIf: !movie.video_url -->
-
-                </div>
-                <div class=" btn btn-link text-center">POC</div>
-                <div>
-                    <span class="label label-success arrowed"> genre</span>
-                    <span class="label label-success arrowed"> genre</span>
-                    <span class="label label-success arrowed"> genre</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-4 col-lg-4 col-xs-4">
-            <div class="thumbnail">
-                <div class="embed-responsive embed-responsive-4by3">
-                    <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
-                    <!-- ngIf: !movie.video_url -->
-                    <a ng-if="!movie.video_url" href="" class="ng-scope">
-                        <img ng-src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg" src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg">                    </a><!-- end ngIf: !movie.video_url -->
-
-                </div>
-                <div class=" btn btn-link text-center">POC
-                </div>
-                <div>
-                    <span class="label label-success arrowed"> genre</span>
-                    <span class="label label-success arrowed"> genre</span>
-                    <span class="label label-success arrowed"> genre</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-4 col-lg-4 col-xs-4">
-                <div class="thumbnail">
-                    <div class="embed-responsive embed-responsive-4by3">
-                        <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
-                        <!-- ngIf: !movie.video_url -->
-                        <a ng-if="!movie.video_url" href="" class="ng-scope">
-                            <img ng-src="https://image.tmdb.org/t/p/w500//gfJGlDaHuWimErCr5Ql0I8x9QSy.jpg" src="https://image.tmdb.org/t/p/w500//xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg">                    </a><!-- end ngIf: !movie.video_url -->
-
+<hr class="colorgraph">
+<div ng-cloak>
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="New Movies">
+                <md-content class="md-padding">
+                    <h3 class="md-display-2">New Movies</h3>
+                    <div class="row" >
+                        <hr class="colorgraph">
+                        <div class="col-lg-4 col-md-6" ng-repeat="movie in model.TMDBmovies">
+                            <div class="thumbnail">
+                                <div class="embed-responsive embed-responsive-4by3">
+                                    <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
+                                    <!-- ngIf: !movie.video_url -->
+                                    <a href="#!/movies/{{movie.id}}" class="ng-scope">
+                                        <img ng-src="https://image.tmdb.org/t/p/w500//{{movie.poster_path}}" src="https://image.tmdb.org/t/p/w500//{{movie.poster_path}}">
+                                    </a><!-- end ngIf: !movie.video_url -->
+                                </div>
+                                <div class="text-center btn btn-link ">{{movie.title}}</div>
+                                <div class="text-left">Release Date : {{movie.release_date |date:'mediumDate'}}</div>
+                                <div>
+                    <span class="label label-success arrowed" ng-repeat="genre in movie.genre_ids">
+                        <a href="#!/genre/movies/{{genre.id}}/{{genre.name}}">{{genre.name}}</a></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class=" btn btn-link text-center">POC</div>
-                    <div>
-                        <span class="label label-success arrowed"> genre</span>
-                        <span class="label label-success arrowed"> genre</span>
-                        <span class="label label-success arrowed"> genre</span>
+                </md-content>
+            </md-tab>
+            <md-tab label="Upcoming Movies">
+                <md-content class="md-padding">
+                    <h3 class="md-display-2">Upcoming Movies</h3>
+                    <div class="row" >
+                        <hr class="colorgraph">
+                        <div class="col-lg-4 col-md-6" ng-repeat="movie in model.TMDBmoviesUpcoming">
+                            <div class="thumbnail">
+                                <div class="embed-responsive embed-responsive-4by3">
+                                    <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
+                                    <!-- ngIf: !movie.video_url -->
+                                    <a href="#!/movies/{{movie.id}}" class="ng-scope">
+                                        <img ng-src="https://image.tmdb.org/t/p/w500//{{movie.poster_path}}" src="https://image.tmdb.org/t/p/w500//{{movie.poster_path}}">
+                                    </a><!-- end ngIf: !movie.video_url -->
+                                </div>
+                                <div class="text-center btn btn-link ">{{movie.title}}</div>
+                                <div class="text-left">Release Date : {{movie.release_date |date:'mediumDate'}}</div>
+                                <div>
+                    <span class="label label-success arrowed" ng-repeat="genre in movie.genre_ids">
+                        <a href="#!/genre/movies/{{genre.id}}/{{genre.name}}">{{genre.name}}</a></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-            </div>
-        </div>
+                   </md-content>
+            </md-tab>
 
-    </div>
+        </md-tabs>
+    </md-content>
 </div>
-
-
-
 </div>
-
 
 <!--models-->
 <!-- Modal -->
