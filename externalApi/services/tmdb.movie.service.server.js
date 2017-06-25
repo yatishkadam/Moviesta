@@ -20,7 +20,7 @@ app.get("/api/movieIMDB/:movieId",getDetailsIMDB);
 
 //api parameters
 var TMDBKey = process.env.TMDBKey;
-var IMDBKey = process.env.IMDBKEY;
+var IMDBKey = process.env.IMDBKey;
 var baseUrl = "api.themoviedb.org";
 var path = "/3/SEARCH_PARAM?api_key=API_KEY&language=en";
 var IMDBbaseUrl="www.omdbapi.com";
@@ -56,7 +56,7 @@ function getDetailsIMDB(req,res) {
         +IMDBMovieDetails.replace("MOVIEID",movieId)
 
     };
-    console.log(options.path);
+    //console.log(options.path);
     var callback = function (response) {
         var str = '';
         response.on('data', function (data) {

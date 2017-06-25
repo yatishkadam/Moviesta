@@ -40,7 +40,7 @@
               .then(function (response) {
                   model.IMDBMovie=angular.copy(response);
                   getCast(model.movieId);
-                  console.log(model.IMDBMovie);
+                  //console.log(model.IMDBMovie);
                   return;
               });
       }
