@@ -48,7 +48,7 @@
       function getCast(movieId) {
           movieService.getCast(movieId)
               .then(function (response) {
-                  console.log(response);
+                  //console.log(response);
                   model.Casts=angular.copy(response.cast);
               });
 
