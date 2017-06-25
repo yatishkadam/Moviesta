@@ -225,14 +225,19 @@ labels as arrows*/
 
 /*glyphicon time */
 .glyphicon.glyphicon-time {
-    font-size: 60px;
+    font-size: 40px;
 }
 
 
 /*cast names and shizz*/
 .title{
     display: inline-block;
+    margin-left:10px ;
 }
+.title img{
+max-height: 130px;
+}
+
 
 
 

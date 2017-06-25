@@ -4,7 +4,7 @@
         .controller('movieGenreController',movieGenreController);
 
     function movieGenreController($location,movieService,$routeParams) {
-        var model =this;
+        var model = this;
         model.findGenreTMDB=findGenreTMDB;
         model.getMoviesForGenre=getMoviesForGenre;
         model.searchMovieTMDB=searchMovieTMDB;

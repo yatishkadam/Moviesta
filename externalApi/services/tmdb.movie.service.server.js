@@ -15,14 +15,19 @@ app.get("/api/movieReviews/:movieId",getMovieReviews);
 app.get("/api/currentMovies",getCurrentMovies);
 app.get("/api/genrelist",getGenreList);
 app.get("/api/genre/:genreId",getMovieGenre);
+app.get("/api/movieIMDB/:movieId",getDetailsIMDB);
 
 
 //api parameters
 var TMDBKey = process.env.TMDBKey;
+var IMDBKey = process.env.IMDBKEY;
 var baseUrl = "api.themoviedb.org";
 var path = "/3/SEARCH_PARAM?api_key=API_KEY&language=en";
+var IMDBbaseUrl="www.omdbapi.com";
+var IMDBPath = "/?apikey=API_KEY&";
 
 
+var IMDBMovieDetails="i=MOVIEID";
 var topMovies = "movie/top_rated";
 var popularSearch = "discover/movie";
 var popularSort = "&sort_by=popularity.desc";
@@ -40,6 +45,30 @@ var movieReviews = "movie/MOVIEID/reviews";
 var genre="genre/GENREID/movies";
 var currentMovies = "movie/now_playing";
 
+
+
+function getDetailsIMDB(req,res) {
+    var movieId=req.params.movieId;
+    var options ={
+        host:IMDBbaseUrl,
+        path:IMDBPath
+            .replace("API_KEY",IMDBKey)
+        +IMDBMovieDetails.replace("MOVIEID",movieId)
+
+    };
+    //console.log(options.path);
+    var callback = function (response) {
+        var str = '';
+        response.on('data', function (data) {
+            str += data;
+        });
+        response.on('end', function () {
+            res.writeHead(200, {"Content-Type": "application/json"});
+            res.end(str);
+        });
+    };
+    http.get(options,callback);
+}
 function findMovie(req,res) {
     var Title = req.params.movie;
     Title=Title.replace(/\s/g,"+");
@@ -321,7 +350,7 @@ function getMovieGenre(req,res) {
             .replace("API_KEY",TMDBKey)
 
     };
-    console.log(options.path);
+    //console.log(options.path);
     var callback = function (response) {
         var str = '';
         response.on('data', function (data) {

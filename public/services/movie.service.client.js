@@ -8,6 +8,11 @@
         this.findGenreTMDB=findGenreTMDB;
         this.getNewMovies=getNewMovies;
         this.getUpcomingMovies=getUpcomingMovies;
+        this.getMovieDetails=getMovieDetails;
+        this.getDetailsIMDB=getDetailsIMDB;
+        this.getCast=getCast;
+        this.getTMDBRelatedMovies=getTMDBRelatedMovies;
+        this.getCriticReviews=getCriticReviews;
 
         //find movie from tmdb
         function findMovieTMDB(title) {
@@ -55,6 +60,50 @@
                 .then(function (response) {
                     var data=response.data;
                     return sendMovieList(data.results);
+                });
+        }
+
+        //get movie details
+        function getMovieDetails(movieId) {
+            var url="/api/movieDetails/"+movieId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        //get movie details from imdb
+        function getDetailsIMDB(movieId) {
+            var url="/api/movieIMDB/"+movieId;
+            return $http.get(url)
+                .then(function (response) {
+                   return response.data;
+                });
+        }
+
+        //function to get the cast
+        function getCast(movieId) {
+            var url="/api/movieCredits/"+movieId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+        //function get related movies
+        function getTMDBRelatedMovies(movieId) {
+            var url="/api/similarMovies/"+movieId;
+            return $http.get(url)
+                .then(function (response) {
+                    var data=response.data;
+                    return sendMovieList(data.results);
+                });
+        }
+        //get reviews
+        function getCriticReviews(movieId) {
+            var url="/api/movieReviews/"+movieId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
                 });
         }
 
@@ -109,6 +158,8 @@
             //console.log(ls);
             return ls;
         }
+
+
 
 
 
