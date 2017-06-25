@@ -56,7 +56,7 @@ function getDetailsIMDB(req,res) {
         +IMDBMovieDetails.replace("MOVIEID",movieId)
 
     };
-    //console.log(options.path);
+    console.log(options.path);
     var callback = function (response) {
         var str = '';
         response.on('data', function (data) {
