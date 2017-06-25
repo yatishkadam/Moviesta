@@ -65,7 +65,7 @@
       function getCriticReviews(movieId) {
           movieService.getCriticReviews(movieId)
               .then(function (response) {
-                  console.log(response.results);
+                  //console.log(response.results);
                   model.reviews=response.results;
               });
        }

@@ -48,7 +48,9 @@
                 controllerAs:'model'
             })
             .when('/cast/:castId',{
-                templateUrl :'views/movie/cast/cast.view.client.html'
+                templateUrl :'views/movie/cast/cast.view.client.html',
+                controller  :'castPageController',
+                controllerAs:'model'
             });
 
 
