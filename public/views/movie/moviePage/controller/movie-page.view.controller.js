@@ -39,8 +39,8 @@
           movieService.getDetailsIMDB(movieId)
               .then(function (response) {
                   model.IMDBMovie=angular.copy(response);
-                  getCast(model.movieId,model.IMDBMovie.Actors);
-                  //console.log(model.IMDBMovie);
+                  getCast(model.movieId);
+                  console.log(model.IMDBMovie);
                   return;
               });
       }
