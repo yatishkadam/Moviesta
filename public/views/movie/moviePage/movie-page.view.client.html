@@ -64,7 +64,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <h4>IMDB Rating</h4>
-                    <span class="glyphicon glyphicon-heart">{{model.IMDBMovie.Ratings[0].Value}}</span>
+                    <span class="glyphicon glyphicon-heart"> {{model.IMDBMovie.Ratings[0].Value}}</span>
                     <h4>User Rating</h4>
                     <span class="glyphicon glyphicon-heart"></span>
                 </div>
@@ -76,7 +76,7 @@
     <hr class="colorgraph">
     <div class="row">
         <ul>
-            <li ng-repeat="cast in model.Casts" ng-if="cast.profile_path" class="title">
+            <li ng-repeat="cast in model.Casts | limitTo:10" ng-if="cast.profile_path" class="title">
                 <figure>
                     <a href="#!/cast/{{cast.id}}">
                         <img ng-src="https://image.tmdb.org/t/p/w92/{{cast.profile_path}}" src="https://image.tmdb.org/t/p/w92/{{cast.profile_path}}">
@@ -113,7 +113,7 @@
         <div class="row">
             <h3>Related Movies</h3>
             <hr class="colorgraph">
-            <div class="col-lg-4 col-md-6" ng-repeat="movie in model.TMDBRelatedMovies">
+            <div class="col-lg-4 col-md-6" ng-repeat="movie in model.TMDBRelatedMovies | limitTo : 5">
                 <div class="thumbnail">
                     <div class="embed-responsive embed-responsive-4by3">
                         <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->

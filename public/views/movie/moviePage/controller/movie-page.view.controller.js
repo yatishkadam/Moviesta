@@ -30,13 +30,7 @@
       function getTMDBRelatedMovies(movieId) {
           movieService.getTMDBRelatedMovies(movieId)
               .then(function (response) {
-                  var cast =[];
-                  var i =0;
-                  while(i<5){
-                      cast.push(response[i]);
-                      i++;
-                  }
-                  model.TMDBRelatedMovies=angular.copy(cast);
+                  model.TMDBRelatedMovies=angular.copy(response);
               });
 
       }
@@ -51,13 +45,11 @@
               });
       }
 
-      function getCast(movieId,IMDBcast) {
+      function getCast(movieId) {
           movieService.getCast(movieId)
               .then(function (response) {
-                  //console.log(response.cast);
-                  IMDBcast=IMDBcast.split(", ");
-                  //console.log(IMDBcast);
-                  makeCastList(response.cast);
+                  console.log(response);
+                  model.Casts=angular.copy(response.cast);
               });
 
       }
@@ -69,19 +61,6 @@
                   model.reviews=response.results;
               });
        }
-       function makeCastList(castTMDB) {
-          var cast =[];
-          var i =0;
-          while(i<10){
-              cast.push(castTMDB[i]);
-              i++;
-          }
-           //console.log(cast);
-           model.Casts=angular.copy(cast);
-       }
-
-
-
        function getMoviesForGenre(genreId) {
            $location("/genre/movies/"+genreId);
        }
