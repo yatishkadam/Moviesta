@@ -241,5 +241,15 @@ max-height: 130px;
 
 
 
-/*text box*/
-
+/*tabs*/
+md-content {
+    background-color: transparent !important;
+    padding-top: 2px;
+}
+/*md-content md-tabs {*/
+    /*background: #f6f6f6;*/
+    /*border: 1px solid #e1e1e1; }*/
+/*md-content md-tabs md-tabs-wrapper {*/
+    /*background: white; }*/
+md-content h1:first-child {
+    margin-top: 0; }

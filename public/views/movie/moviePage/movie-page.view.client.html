@@ -91,43 +91,61 @@
     </div>
     <br>
     <div class="row">
-        <div class="col-lg-7 col-md-7">
-            <h3>CRITIC REVIEWS</h3>
-            <hr class="colorgraph">
-            <div ng-repeat="review in model.reviews | limitTo : 3">
-                <h4><span class="glyphicon glyphicon-user"> {{review.author}}</span></h4>
-                <p>{{review.content}}</p>
+        <div class="container-fluid">
+            <div class="col-lg-7 col-md-7">
+                <div ng-cloak>
+                    <md-content>
+                        <md-tabs md-dynamic-height md-border-bottom>
+                            <md-tab label="Critic Reviews">
+                                <md-content class="md-padding">
+                                        <h3>CRITIC REVIEWS</h3>
+                                        <hr class="colorgraph">
+                                        <div ng-repeat="review in model.reviews | limitTo : 3">
+                                            <h4><span class="glyphicon glyphicon-user"> {{review.author}}</span></h4>
+                                            <p>{{review.content}}</p>
+                                        </div>
+                                </md-content>
+                            </md-tab>
+                            <md-tab label="User Reviews">
+                                <md-content class="md-padding">
+                                    <h3>USER REVIEWS</h3>
+                                    <hr class="colorgraph">
+                                    <div ng-repeat="review in model.UserReviews">
+                                        <h4><span class="glyphicon glyphicon-user"> {{review.author}}</span>
+                                            <a ng-click="model.reviewDownVote(review._id)">
+                                                <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.downVotes.length}}</i>
+                                            </a>
+                                            <a ng-click="model.reviewUpVote(review._id)">
+                                                <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.upVotes.length}}</i>
+                                            </a>
+                                        </h4>
+                                        <p>{{review.content}}</p>
+                                    </div>
+                                </md-content>
+                            </md-tab>
+                        </md-tabs>
+                    </md-content>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-5 col-md-5">
-            <h3>Write a Review</h3>
-            <hr class="colorgraph">
-            <div class="container-fluid">
-                <h6 ng-show="!model.user._id">Login to review</h6>
-                <textarea class="col-xs-12" rows="6" ng-disabled="!model.user._id" ng-model="model.newReview.content">
+            <div class="col-lg=5 col-md-5">
+                <h4>Write a Review</h4>
+                <hr class="colorgraph">
+                <div class="container-fluid">
+                    <h6 ng-show="!model.user._id">Login to review</h6>
+                    <textarea class="col-xs-12" rows="6" ng-disabled="!model.user._id" ng-model="model.newReview.content">
                 </textarea>
-                <button ng-click="model.createReview(model.newReview)" class="btn btn-primary btn-block btn-sm" ng-disabled="!model.user._id">Submit Review</button>
-            </div>
-            <h3>USER REVIEWS</h3>
-            <hr class="colorgraph">
-            <div ng-repeat="review in model.UserReviews">
-                <h4><span class="glyphicon glyphicon-user"> {{review.author}}</span>
-                    <a ng-click="model.reviewDownVote(review._id)">
-                        <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.downVotes.length}}</i>
-                    </a>
-                    <a ng-click="model.reviewUpVote(review._id)">
-                        <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.upVotes.length}}</i>
-                    </a>
-                </h4>
-                <p>{{review.content}}</p>
+                    <button ng-click="model.createReview(model.newReview)" class="btn btn-primary btn-block btn-sm" ng-disabled="!model.user._id">Submit Review</button>
+                </div>
             </div>
         </div>
     </div>
     <div class="container-fluid">
+
         <div class="row">
-            <h3>Related Movies</h3>
+            <h3>Related Movies <span style="float:right;">
+                <h4 class="pull-right btn btn-sm btn-link"><a href="#!/related/{{model.movieId}}">See more..</a></h4></span></h3>
             <hr class="colorgraph">
-            <div class="col-lg-4 col-md-6" ng-repeat="movie in model.TMDBRelatedMovies | limitTo : 5">
+            <div class="col-lg-4 col-md-6" ng-repeat="movie in model.TMDBRelatedMovies | limitTo : 3">
                 <div class="thumbnail">
                     <div class="embed-responsive embed-responsive-4by3">
                         <!--<iframe ng-src="{{movie.video_url}}"></iframe>-->
@@ -144,6 +162,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 

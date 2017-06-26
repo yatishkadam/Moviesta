@@ -59,6 +59,14 @@
                     currentUser:checkCurrentUser
                 }
             })
+            .when('/related/:movieId',{
+                templateUrl : 'views/movie/moviesearch/movie-search.view.client.html',
+                controller  : 'relatedMovieController',
+                controllerAs: 'model',
+                resolve:{
+                    currentUser:checkCurrentUser
+                }
+            })
             .when('/genre/movies/:genreId/:genrename', {
                 templateUrl :'views/movie/moviesearch/movie-search.view.client.html',
                 controller  :'movieGenreController',
@@ -67,6 +75,7 @@
                     currentUser:checkCurrentUser
                 }
             })
+
             .when('/cast/:castId',{
                 templateUrl :'views/movie/cast/cast.view.client.html',
                 controller  :'castPageController',
