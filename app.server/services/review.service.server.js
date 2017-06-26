@@ -2,15 +2,17 @@ var app=require('../../express');
 var reviewModel = require('../models/reviews/review.model.server');
 
 
+
 app.get   ("/api/reviews",getAllReviews);
 app.post  ("/api/review",createReview);
-//app.put   ("api/review",updateReview);
+app.put   ("/api/review/:reviewId",updateReview);
 app.get   ("/api/getReviewByMovieId/:movieId",getReviewByMovieId);
 app.get   ("/api/getReviewByUserId/:userId",getReviewByUserId);
-app.delete("/api/movie/:movieId/review/:reviewId",deleteReview);
+app.delete("/api/review/:reviewId",deleteReview);
 app.get   ("/api/review/:reviewId",findReview);
 app.put   ("/api/:userId/review/upvote/:reviewId",updateUpvote);
 app.put   ("/api/:userId/review/downvote/:reviewId",downVote);
+
 
 
 
@@ -18,7 +20,7 @@ app.put   ("/api/:userId/review/downvote/:reviewId",downVote);
 function createReview(req,res) {
     //console.log("________inside create review_______");
     var review=req.body;
-    console.log(review);
+    //console.log(review);
     //console.log(review.userId);
     //console.log(review.movieId);
     //console.log("review->>\n");
@@ -30,11 +32,19 @@ function createReview(req,res) {
         });
 }
 
+function updateReview(req,res) {
+    var reviewId=req.params.reviewId;
+    var review=req.body;
+    reviewModel.updateReview(reviewId,review)
+        .then(function (response) {
+            res.sendStatus(200);
+        });
+}
+
 //delete review
 function deleteReview(req,res) {
     var reviewId=req.params.reviewId;
-    var movieId=req.params.movieId;
-    reviewModel.deleteReview(reviewId,movieId)
+    reviewModel.deleteReview(reviewId)
         .then(function (response) {
             res.sendStatus(200);
         });
@@ -95,3 +105,6 @@ function downVote(req,res) {
             res.json(response);
         });
 }
+
+
+

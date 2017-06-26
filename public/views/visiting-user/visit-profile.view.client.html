@@ -51,14 +51,9 @@
                 <div class="avatar">
                     <img alt="./images/loginhead.jpg" ng-src="{{model.user.url}}" src="{{model.user.url}}">
                 </div>
+                <div ng-show="!model.isfollow" ng-click="model.followUser()" class="btn btn-success btn-sm">follow</div>
+                <div ng-show="model.isfollow" ng-click="model.unFollow()" class="btn btn-danger btn-sm">Unfollow</div>
                 <div class="info">
-                    <div class="title">
-                        <form action="/api/upload"   method="post" enctype="multipart/form-data" style="padding-bottom: 4px">
-                            <input  name="myFile"    type="file" class="form-control"/>
-                            <input  name="userId"    value="{{model.userId}}"   style="display: none"/>
-                            <button type="submit"    class="btn btn-primary btn-block">Upload Profile Pic</button>
-                        </form>
-                    </div>
                     <div class="desc">{{model.user.username}}</div>
                     <div class="desc">{{model.user.email}}</div>
                 </div>
@@ -69,34 +64,6 @@
         <div ng-cloak>
             <md-content>
                 <md-tabs md-dynamic-height md-border-bottom>
-                    <md-tab label="Profile">
-                        <md-content class="md-padding">
-                                <div class="alert alert-info" ng-show="model.error">{{model.error}}</div>
-                                <div class="alert alert-success" ng-show="model.sucess">{{model.sucess}}</div>
-                                <div class="row">
-                                    <div class="col-lg-12 col-sm-12 col-md-12">
-                                            <div class="form-group">
-                                                <label  for="username">Username</label>
-                                                <input  readonly="readonly" ng-model="model.user.username" type="text" class="form-control" id="username" placeholder="Username">
-                                            </div>
-                                            <div >
-                                                <label for="email">Email address</label>
-                                                <input ng-model="model.user.email" type="email" class="form-control" id="email" placeholder="alice@wonderland.com">
-                                            </div>
-                                            <div >
-                                                <label for="first-name">First Name</label>
-                                                <input ng-model="model.user.firstName" type="text" class="form-control" id="first-name" placeholder="Alice">
-                                            </div>
-                                            <div >
-                                                <label for="last-name">Last Name</label>
-                                                <input ng-model="model.user.lastName" type="text" class="form-control" id="last-name" placeholder="Wonderland">
-                                            </div>
-                                        <a ng-click="model.updateUser(model.user)" class="btn btn-success btn-block" href="">Save Changes</a>
-                                        <a ng-click="model.unregister(model.userId)" class="btn btn-danger btn-block" href="">Delete Profile</a>
-                                    </div>
-                                </div>
-                        </md-content>
-                    </md-tab>
                     <md-tab label="Followers">
                         <md-content class="md-padding">
                             <div ng-repeat="user in model.Followers">
@@ -106,9 +73,9 @@
                                     <img ng-show="!user.url" ng-src="./images/loginhead.jpg" src="./images/loginhead.jpg">
                                 </div>
                                 <h4 class="pull-left">
-                                    <a href="#!/profile/{{user._id}}" class="btn btn-link"> {{user.username}}</a>
+                                    <a ng-click="model.getProfile(user._id)" class="btn btn-link"> {{user.username}}</a>
                                 </h4>
-                                </div>
+                            </div>
                                 <hr>
                             </div>
                         </md-content>
@@ -117,32 +84,26 @@
                         <md-content class="md-padding">
                             <div ng-repeat="user in model.Following">
                                 <div class="row">
-                                <a ng-click="model.unFollow(user._id)" class="btn btn-sm btn-danger  pull-right">unfollow</a>
                                 <div class="avatar1 pull-left">
                                     <img ng-show="user.url" ng-src="{{user.url}}" src="{{user.url}}">
                                     <img ng-show="!user.url" ng-src="./images/loginhead.jpg" src="./images/loginhead.jpg">
                                 </div>
                                 <h4 class="pull-left">
-                                    <a href="#!/profile/{{user._id}}" class="btn btn-link"> {{user.username}}</a>
+                                    <a ng-click="model.getProfile(user._id)" class="btn btn-link"> {{user.username}}</a>
                                 </h4>
-                                </div>
-                                <hr>
+                            </div>
+                            <hr>
                             </div>
                         </md-content>
                     </md-tab>
                     <md-tab label="Reviews">
                         <md-content class="md-padding">
                             <div ng-repeat="review in model.userGivenReviews">
-                                <a ng-click="model.reviewDelete(review._id)" class="btn btn-danger btn-sm pull-right" style="margin-left: 4px">
-                                    <i class="fa fa-trash " aria-hidden="true"></i>
-                                </a>
-                                <a ng-click="model.getReviewById(review._id)" data-toggle="modal" data-target="#editReview" class="btn btn-primary btn-sm pull-right" style="margin-left: 4px">
-                                    <i class="fa fa-pencil " aria-hidden="true"></i>
-                                </a>
                                 <h4><a href="#!/movies/{{review.tmdbMovieId}}" class="btn btn-link"> {{review.movieName}}</a>
                                     <a ng-click="model.reviewDownVote(review._id)">
                                         <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.downVotes.length}}</i>
                                     </a>
+
                                     <a ng-click="model.reviewUpVote(review._id)">
                                         <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.upVotes.length}}</i>
                                     </a>
@@ -157,27 +118,6 @@
                 </md-tabs>
             </md-content>
         </div>
-        </div>
-    </div>
-</div>
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="editReview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Edit Review</h4>
-            </div>
-            <div class="modal-body">
-                <textarea ng-model="model.reviewForUpdate.content" class="form-control" style="min-width: 100%">
-                </textarea>
-            </div>
-            <div class="modal-footer">
-                <button ng-click="model.reviewUpdate(model.reviewForUpdate._id,model.reviewForUpdate)" type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
-            </div>
         </div>
     </div>
 </div>

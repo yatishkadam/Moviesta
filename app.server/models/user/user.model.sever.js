@@ -2,6 +2,7 @@ var mongoose=require('mongoose');
 var userSchema= require("./user.schema.sever");
 var userModel=mongoose.model("userModel",userSchema);
 var followModel=require("../follow/follow.model.server");
+var reviewModel=require("../reviews/review.model.server");
 var bcrypt = require("bcrypt-nodejs");
 userModel.createUser=createUser;
 userModel.findUserById=findUserById;
@@ -15,6 +16,8 @@ userModel.addToFollowers=addToFollowers;
 userModel.addToFollowing=addToFollowing;
 userModel.removeFollowing=removeFollowing;
 userModel.removeFollower=removeFollower;
+userModel.addReviewUser=addReviewUser;
+userModel.findUserByFacebookId=findUserByFacebookId;
 module.exports=userModel;
 
 // crud and few other functions that can be performed on the database
@@ -49,6 +52,10 @@ function findUserByCredentials(username,password) {
 function findUserByGoogleId(googleId) {
     return userModel.findOne({'google.id':googleId});
 }
+function findUserByFacebookId(facebookId) {
+    return userModel.findOne({'facebook.id': facebookId});
+}
+
 
 //find a particular user
 function findUserById(userId) {
@@ -69,6 +76,16 @@ function updateUser(userId,newUser) {
 }
 
 
+function addReviewUser(reviewId,userId) {
+    console.log(userId);
+    console.log(reviewId);
+    return userModel.findOne({_id:userId})
+        .then(function (user) {
+            user.reviews.push(reviewId);
+            return user.save();
+        });
+}
+
 //delete user
 function deleteUser(userId) {
     return followModel.deleteFollowing(userId)
@@ -76,8 +93,16 @@ function deleteUser(userId) {
             //console.log("_____deleteUser_______/model/__");
             userModel.findById(userId)
                 .then(function (user) {
+                    console.log("inside delete user item=");
+                    console.log(user);
+                    user.reviews.forEach(function (item) {
+                        console.log("inside delete user item=");
+                        console.log(item);
+                      reviewModel.deleteReview(item);
+                      return userModel.remove({_id: user._id});
+                    });
                     //console.log(user);
-                    return userModel.remove({_id: user._id});
+
                 });
         });
 }
@@ -119,6 +144,7 @@ function removeFollowing(userId,followingId) {
             return user.save();
         });
 }
+
 
 //HELPER FUNCTIONS
 

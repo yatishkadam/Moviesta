@@ -3,15 +3,28 @@
         .module("Moviesta")
         .controller('profileController',profileController);
 
-    function profileController($location,$routeParams,userService,currentUser,$timeout) {
+    function profileController($location,userService,currentUser,DBService,movieDBService) {
         var model = this;
-        model.userid =currentUser._id; //$routeParams['userId'];
+        model.userId =currentUser._id; //$routeParams['userId'];
         model.updateUser=updateUser;
         model.unregister=deleteUser;
         model.logout=logout;
         model.searchMovieTMDB=searchMovieTMDB;
+        model.getReviewsForUser=getReviewsForUser;
+        model.reviewDelete=reviewDelete;
+        model.reviewDownVote=reviewDownVote;
+        model.reviewUpVote=reviewUpVote;
+        model.getReviewById=getReviewById;
+        model.reviewUpdate=reviewUpdate;
+        model.getFollowing=getFollowing;
+        model.getFollowers=getFollowers;
+        model.unFollow=unFollow;
+
         function init() {
             renderUser(currentUser);
+            getReviewsForUser(model.userId);
+            getFollowers(model.userId);
+            getFollowing(model.userId)
         }
         init();
         // userService
@@ -50,6 +63,76 @@
                 model.sucess="could not delete profile , please try again";
             }
 
+        }
+        function getReviewsForUser(userId) {
+            DBService.getReviewsForUser(userId)
+                .then(function (response) {
+                    model.userGivenReviews=angular.copy(response);
+                })
+        }
+
+        function getReviewById(reviewId) {
+            DBService.getReviewById(reviewId)
+                .then(function(response){
+                    model.reviewForUpdate=angular.copy(response);
+                });
+        }
+
+        function reviewDelete(reviewId) {
+            DBService.deleteReview(reviewId)
+                .then(function (response) {
+                    getReviewsForUser(model.userId);
+                });
+        }
+
+        function reviewUpdate(reviewId,review) {
+            DBService.reviewUpdate(reviewId,review)
+                .then(function (response) {
+                    getReviewsForUser(model.userId);
+                });
+        }
+        function reviewDownVote(reviewId) {
+            //console.log(reviewId);
+            movieDBService.reviewDownVote(reviewId,model.user._id)
+                .then(function (response) {
+                        getReviewsForUser(model.userId);
+                    },
+                    function (response) {
+                        //console.log(response);
+                    });
+        }
+        function reviewUpVote(reviewId) {
+            //console.log(reviewId);
+            movieDBService.reviewUpVote(reviewId,model.user._id)
+                .then(function(response){
+                        getReviewsForUser(model.userId);
+                    },
+                    function (response) {
+                        //console.log(response);
+                    });
+        }
+
+        function getFollowers(userId) {
+            DBService.getFollowers(userId)
+                .then(function (response) {
+                    console.log(response.follower);
+                   model.Followers=angular.copy(response.follower);
+
+                });
+
+        }
+        function getFollowing(userId) {
+            DBService.getFollowing(userId)
+                .then(function (response) {
+                    model.Following=angular.copy(response.following);
+                    });
+        }
+
+        function unFollow(followingId) {
+            DBService.unFollow(followingId,model.userId)
+                .then(function (response) {
+                    getFollowing(model.userId);
+                });
         }
 
         function logout() {

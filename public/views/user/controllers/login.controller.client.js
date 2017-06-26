@@ -6,23 +6,33 @@
     function loginController($location,userService) {
         var model =this;
         model.login=login;
-
-        function login(username,password) {
-            userService
-                .login(username,password)
-                .then(validLogin,error);
-
-
-            //if the user is valid
-            function validLogin(found) {
-                if (found !== null) {
-                    $location.url("/profile");
+            function login(user) {
+                if (validate(user)) {
+                    if (user) {
+                        userService
+                            .login(user.username,user.password)
+                            .then(function (response) {
+                                $location.url("/profile");
+                            }, function (err) {
+                                model.message = "Wrong username or password.";
+                            });
+                    }
+                } else {
+                    model.message = "Please check details and try again";
                 }
             }
-            //if the user is not valid
-            function error() {
-                model.message="sorry "+username+" not found";
+            function validate(user) {
+                var flag = true;
+
+                if (user) {
+                    flag = flag && user.username;
+                    flag = flag && user.password;
+                } else {
+                    flag = false;
+                }
+
+                return flag;
             }
         }
-    }
+
 })();

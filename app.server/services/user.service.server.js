@@ -1,8 +1,11 @@
 var app=require('../../express');
 var passport = require('passport');
 var bcrypt = require("bcrypt-nodejs");
+var multer = require('multer'); // npm install multer --save
+var upload = multer({ dest: __dirname+'/../../public/uploads' });
 var LocalStrategy= require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
@@ -18,18 +21,24 @@ app.post   ("/api/logout",logout);
 app.post   ("/api/user/login", passport.authenticate('local'),login);
 app.post   ("/api/register",register);
 app.get    ("/auth/google",passport.authenticate('google',{scope:['profile','email']}));
+
+app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+
 app.get('/auth/google/callback',
     passport.authenticate('google', {
-        successRedirect: '/#/',
-        failureRedirect: '/#/login'
+        successRedirect: '/#!/',
+        failureRedirect: '/#!/login'
     }));
 
-app.put    ("/api/user/:userId/follow/:followingId",follow);
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/#!/profile',
+        failureRedirect: '/#!/login'
+    }));
 
-app.delete ("/api/user/:userId/unfollow/:followingId",unfollow);
-app.get    ("/api/getFollowers/:userId",getFollowers);
-app.get    ("/api/getFollowing/:userId",getFollowing);
 
+app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
 
 var googleConfig = {
@@ -37,19 +46,70 @@ var googleConfig = {
     clientSecret : process.env.GOOGLE_CLIENT_SECRET,
     callbackURL  : process.env.GOOGLE_CALLBACK_URL
 };
+
+var facebookConfig = {
+    clientID     : process.env.FACEBOOK_CLIENT_ID,
+    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+};
+passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+
 function localStrategy(username,password, done) {
-    userModel.findUserByCredentials(username,password)
+    userModel
+        .findUserByCredentials(username,password)
         .then(function (user) {
                 if(user){
-                    done(null,user);
+                    return done(null,user);
                 }
                 else{
-                    done(null,false);
+                    return done(null,false,{ message: 'Incorrect password.'});
                 }
             },function (error) {
-                done(error,false);
+            return done(error,false);
 
+            }
+        );
+}
+
+function facebookStrategy(token, refreshToken, profile, done) {
+    userModel
+        .findUserByFacebookId(profile.id).then(
+
+        function (user) {
+            console.log(profile);
+            if (user) {
+                return done(null, user);
+            } else {
+                var dName = profile.displayName;
+                var emailParts = dName.split(" ");
+                console.log(profile);
+                var newfacebookUser = {
+                    username: emailParts[0]+emailParts[1],
+                    firstName: profile.name.givenName,
+                    lastName: profile.name.familyName,
+                    facebook: {
+                        id: profile.id,
+                        token: token
+                    }
+                };
+                return userModel.createUser(newfacebookUser);
+            }
+        },
+        function (err) {
+            if (err) {
+                return done(err);
+            }
+        }
+    )
+        .then(
+            function (user) {
+                return done(null, user);
+            },
+            function (err) {
+                if (err) {
+                    return done(err);
+                }
             }
         );
 }
@@ -89,56 +149,6 @@ function googleStrategy(token, refreshToken, profile, done) {
             }
         );
 }
-//add to followers when someone follows a user
-function follow(req,res) {
-    var follower=req.params.userId;
-    var following=req.params.followingId;
-    var newFollow= new Object();
-    newFollow.follower=follower;
-    newFollow.following=following;
-    //console.log(newFollow);
-    followModel.createFollow(newFollow)
-        .then(function (response) {
-                res.sendStatus(200)
-            },
-            function (err) {
-                res.sendStatus(404);
-            });
-}
-
-//remove user from following
-function unfollow(req,res) {
-    var follower=req.params.userId;
-    var following=req.params.followingId;
-    //console.log(following);
-    //console.log(follower);
-    followModel.deleteFollow(follower,following)
-        .then(function (response) {
-                console.log(response);
-                res.sendStatus(200);
-            },
-            function (err) {
-                res.sendStatus(404);
-            });
-}
-//get all forllowers give userId
-function getFollowers(req,res) {
-    var userId = req.params.userId;
-    followModel.findAllFollowers(userId)
-        .then(function (response) {
-
-            res.json(response);
-        });
-}
-
-//get all following give
-function getFollowing(rea,res) {
-    var userId=req.params.userID;
-    followModel.findAllFollowing(userId)
-        .then(function (response) {
-            res.json(response);
-        });
-}
 
 function register(req, res) {
     var userObj = req.body;
@@ -159,7 +169,8 @@ function logout(req,res) {
 }
 
 function login(req,res){
-    res.json(req.user);
+    var user = req.user;
+    res.json(user);
 }
 
 function loggedin(req, res) {
@@ -184,10 +195,10 @@ function createUser(req,res) {
 //function to delete user
 function deleteUser(req,res) {
     var userId = req.params.userId;
-    console.log(userId);
+    //console.log(userId);
     userModel.deleteUser(userId)
         .then(function (status) {
-            console.log("_________end__________");
+            //console.log("_________end__________");
             //console.log(status);
             res.sendStatus(200);
         });
@@ -247,6 +258,29 @@ function findAllUsers(req,res) {
         });
 
     }
+}
+
+
+function uploadImage(req, res) {
+    var myFile        = req.file;
+    var userId = req.body.userId;
+    var originalname  = myFile.originalname; // file name on user's computer
+    var filename      = myFile.filename;     // new file name in upload folder
+    var path          = myFile.path;         // full path of uploaded file
+    var destination   = myFile.destination;  // folder where file is saved to
+    var size          = myFile.size;
+    var mimetype      = myFile.mimetype;
+    console.log("__userId____");
+    console.log(userId);
+    user = userModel.findUserById(userId);
+    user.url = '/uploads/'+filename;
+    console.log(user.url);
+    //console.log(user);
+    userModel.updateUser(userId,user)
+        .then(function(){
+            var callbackUrl= "/#!/profile";
+            res.redirect(callbackUrl);
+        });
 }
 
 

@@ -55,7 +55,7 @@ function addReview(movieId,reviewId) {
     return movieModel
         .findOne({tmdbMovieId:movieId})
         .then(function (movie) {
-            //console.log(movie);
+            console.log(movie);
             movie.reviews.push(reviewId);
             //console.log(movie);
             return movie.save();

@@ -27,9 +27,10 @@ function createFollow(newFollow) {
 
 // delete a follow
 function deleteFollow(follower,following) {
-    return followModel.findOne({follower:follower,following:following})
+
+    return followModel.findOne({follower:follower, following:following})
         .then(function (follow) {
-            //console.log(follow);
+            console.log(follow);
             followModel.remove({_id:follow._id})
                 .then(function (response) {
                     //console.log(response);
@@ -40,13 +41,21 @@ function deleteFollow(follower,following) {
 //find followers
 function findAllFollowers(followerId) {
     //console.log(followerId);
-    return followModel.find({following:followerId});
+    return followModel
+        .find({following:followerId})
+        .populate('follower')
+        .populate('following')
+        .exec();
 }
 
 //find following
 
 function findAllFollowing(userId) {
-    return followModel.find({follower:userId});
+    return followModel
+        .find({follower:userId})
+        .populate('follower')
+        .populate('following')
+        .exec();
 }
 
 //delete following when user deletes profile

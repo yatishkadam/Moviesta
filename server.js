@@ -18,6 +18,8 @@ require("./session/app");
 app.use(app.express.static(__dirname+'/public'));
 require('./app.server/app');
 require('./externalApi/app');
+
+
 var port= process.env.PORT||3000;
 
 app.listen(port);

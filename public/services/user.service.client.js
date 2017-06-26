@@ -44,6 +44,7 @@
             };
             return $http.post(url, credentials)
                 .then(function (response) {
+                    //console.log(response.data);
                     return response.data;
                 });
         }

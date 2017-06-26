@@ -23,7 +23,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a ng-show="model.user._id" href="#!/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-                <li><a href="#!/" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-phone"></span> Contact</a></li>
+                <li><a data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-phone"></span> Contact</a></li>
                 <li><a ng-show="!model.user._id" href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 <li><a ng-show="!model.user._id" href="#!/register"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
                 <li><a ng-show="model.user._id" ng-click="model.logout()"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>

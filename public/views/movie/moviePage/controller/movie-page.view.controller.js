@@ -17,6 +17,7 @@
       model.reviewUpVote=reviewUpVote;
       model.logout=logout;
       model.createReview=createReview;
+      model.getProfile=getProfile;
       model.movieId=$routeParams.movieId;
       function init() {
           getMovieDetails(model.movieId);
@@ -109,6 +110,7 @@
            review.tmdbMovieId=model.movieId;
            review.author=model.user.firstName;
            review._userId=model.user._id;
+           review.movieName=model.movie.title;
            review._movieId=model.movie._id;
            movieDBService.createReview(review)
                .then(function (response) {
@@ -136,6 +138,16 @@
                });
        }
 
+       function getProfile(userId) {
+          console.log(userId);
+          console.log(model.user._id);
+           if(userId===model.user._id){
+               $location.url("/profile");
+           }
+           else {
+               $location.url("/profile/"+userId);
+           }
+       }
    }
 
 

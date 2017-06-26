@@ -5,6 +5,7 @@ var userSchema = mongoose.Schema({
     firstName:String,
     lastName:String,
     email:String,
+    url: String,
     phone:String,
     type:{type:String},
     reviews:[{type:mongoose.Schema.Types.ObjectId,ref : "reviewModel"}],

@@ -34,3 +34,4 @@ mongoose.Promise= require("q").Promise;
 require("./services/user.service.server");
 require("./services/review.service.server");
 require("./services/movie.service.server");
+require("./services/follow.server.service");

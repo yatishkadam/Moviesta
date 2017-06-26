@@ -24,6 +24,14 @@
             controller  : 'registerController',
             controllerAs: 'model'
             })
+            .when('/profile/:userId',{
+                templateUrl : 'views/visiting-user/visit-profile.view.client.html',
+                controller  : 'visitProfileController',
+                controllerAs: 'model',
+                resolve:{
+                    currentUser:checkLoggedIn
+                }
+            })
             .when('/profile',{
                 templateUrl : 'views/user/profile.view.client.html',
                 controller  : 'profileController',
@@ -31,9 +39,6 @@
                 resolve:{
                     currentUser:checkLoggedIn
                 }
-            })
-            .when('/movies/trailers',{
-                templateUrl : 'views/movie/trailers/trailers.view.client.html'
             })
             .when('/movies/:movieId',{
                 templateUrl :'views/movie/moviePage/movie-page.view.client.html',

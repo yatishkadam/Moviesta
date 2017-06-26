@@ -2,10 +2,12 @@ var mongoose=require('mongoose');
 var reviewSchema=require('./review.schema.server');
 var reviewModel=mongoose.model("reviewModel",reviewSchema);
 var movieModel=require('../movie/movie.model.server');
+var userModel=require('../user/user.model.sever');
 
 
 reviewModel.createReview=createReview;
 reviewModel.deleteReview= deleteReview;
+reviewModel.updateReview=updateReview;
 reviewModel.findReview=findReview;
 reviewModel.findReviewByMovieId=findReviewByMovieId;
 reviewModel.findReviewByUserId=findReviewByUserId;
@@ -23,9 +25,12 @@ function createReview(review){
     //console.log("_______inside create review/ model_______");
     return reviewModel.create(review)
         .then(function (review) {
-            //console.log(review);
+            // console.log(review._userId);
+            // console.log(review._id);
             movieModel.addReview(review.tmdbMovieId, review._id)
-                .then(function () {
+                .then(function (resposne) {
+                    console.log(resposne);
+                    userModel.addReviewUser(review._id,review._userId);
                     //console.log("____AFTER ADD REVIEW CALL_____");
                 });
 
@@ -33,13 +38,17 @@ function createReview(review){
 }
 
 //delete a review
-function deleteReview(reviewId,movieId) {
+function deleteReview(reviewId) {
     return reviewModel.remove({_id:reviewId})
         .then(function () {
-            movieModel.removeReview(movieId,reviewId);
+            movieModel.removeReview(reviewId);
         });
 }
 
+//uupdate Review
+function updateReview(reviewId,review) {
+    return reviewModel.update({_id:reviewId},{$set:review});
+}
 //find all review given review id
 function findReview(reviewId) {
     return reviewModel.findById(reviewId);
@@ -60,7 +69,8 @@ function findReviewByUserId(userId) {
 
 //find all reviews
 function findAllReviews() {
-    return reviewModel.find();
+    return reviewModel.find()
+        .populate();
 }
 
 //update upvotes
