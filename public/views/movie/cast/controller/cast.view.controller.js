@@ -3,12 +3,14 @@
         .module("Moviesta")
         .controller("castPageController",castPageController);
 
-    function castPageController($location,$routeParams,castService) {
+    function castPageController($location,$routeParams,castService,currentUser,userService) {
         var model= this;
+        model.user=currentUser;
         model.getcastDetails=getcastDetails;
         model.getCastRelatedMovie=getCastRelatedMovie;
         model.getMoviesForGenre=getMoviesForGenre;
         model.searchMovieTMDB=searchMovieTMDB;
+        model.logout=logout;
 
         model.castId=$routeParams.castId;
         function init() {
@@ -40,6 +42,14 @@
 
         function searchMovieTMDB(title) {
             $location.url("/movie/search/"+title);
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url("/login");
+                });
         }
     }
 })();

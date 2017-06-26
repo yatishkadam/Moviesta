@@ -2,11 +2,13 @@
     angular
         .module("Moviesta")
         .controller("homeController",homeController);
-    function homeController($location,movieService) {
+    function homeController($location,movieService,currentUser,userService) {
         var model=this;
-        model.slide=slide;
+        model.user=currentUser;
+        model.logout=logout;
         model.searchMovieTMDB=searchMovieTMDB;
         model.getNewMovies=getNewMovies;
+
         function init() {
             $('#myCarousel').carousel({
                 interval: 3500
@@ -39,6 +41,13 @@
             movieService.getUpcomingMovies()
                 .then(function (response) {
                     model.TMDBmoviesUpcoming=response;
+                });
+        }
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url("/login");
                 });
         }
 

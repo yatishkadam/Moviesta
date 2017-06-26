@@ -9,7 +9,10 @@
             .when('/',{
                 templateUrl : 'views/home/home.html',
                 controller  : 'homeController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve:{
+                    currentUser:checkCurrentUser
+                }
             })
             .when('/login',{
                 templateUrl : 'views/user/login.view.client.html',
@@ -35,22 +38,42 @@
             .when('/movies/:movieId',{
                 templateUrl :'views/movie/moviePage/movie-page.view.client.html',
                 controller  :'moviePageController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve:{
+                    currentUser:checkCurrentUser
+                }
             })
             .when('/movie/search/:title',{
                 templateUrl : 'views/movie/moviesearch/movie-search.view.client.html',
                 controller  : 'movieSearchController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve:{
+                    currentUser:checkCurrentUser
+                }
+            })
+            .when('/TopRated',{
+                templateUrl : 'views/movie/moviesearch/movie-search.view.client.html',
+                controller  : 'topRatedController',
+                controllerAs: 'model',
+                resolve:{
+                    currentUser:checkCurrentUser
+                }
             })
             .when('/genre/movies/:genreId/:genrename', {
                 templateUrl :'views/movie/moviesearch/movie-search.view.client.html',
                 controller  :'movieGenreController',
-                controllerAs:'model'
+                controllerAs:'model',
+                resolve:{
+                    currentUser:checkCurrentUser
+                }
             })
             .when('/cast/:castId',{
                 templateUrl :'views/movie/cast/cast.view.client.html',
                 controller  :'castPageController',
-                controllerAs:'model'
+                controllerAs:'model',
+                resolve:{
+                    currentUser:checkCurrentUser
+                }
             });
 
 

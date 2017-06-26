@@ -3,14 +3,14 @@ var reviewModel = require('../models/reviews/review.model.server');
 
 
 app.get   ("/api/reviews",getAllReviews);
-app.post  ("/api/review/:userId/:movieId",createReview);
+app.post  ("/api/review",createReview);
 //app.put   ("api/review",updateReview);
 app.get   ("/api/getReviewByMovieId/:movieId",getReviewByMovieId);
 app.get   ("/api/getReviewByUserId/:userId",getReviewByUserId);
 app.delete("/api/movie/:movieId/review/:reviewId",deleteReview);
 app.get   ("/api/review/:reviewId",findReview);
-app.put   ("/api/review/upvote/:reviewId",updateUpvote);
-app.put   ("/api/review/downvote/:reviewId",downVote);
+app.put   ("/api/:userId/review/upvote/:reviewId",updateUpvote);
+app.put   ("/api/:userId/review/downvote/:reviewId",downVote);
 
 
 
@@ -18,9 +18,7 @@ app.put   ("/api/review/downvote/:reviewId",downVote);
 function createReview(req,res) {
     //console.log("________inside create review_______");
     var review=req.body;
-    //console.log(review);
-    //review.userId=req.params.userId;
-    review._movieId=req.params.movieId;
+    console.log(review);
     //console.log(review.userId);
     //console.log(review.movieId);
     //console.log("review->>\n");
@@ -56,7 +54,7 @@ function getReviewByUserId(req,res) {
     var userId=req.params.userId;
     reviewModel.findReviewByUserId(userId)
         .then(function (reviews) {
-            console.log(reviews);
+            //console.log(reviews);
             res.json(reviews);
         });
 }
@@ -65,7 +63,7 @@ function getReviewByMovieId(req,res) {
     var movieId= req.params.movieId;
     reviewModel.findReviewByMovieId(movieId)
         .then(function (reviews) {
-            console.log(reviews);
+            //console.log(reviews);
             res.json(reviews);
         });
 }
@@ -80,16 +78,19 @@ function findReview(req,res) {
 
 
 function updateUpvote(req,res) {
+    var userId=req.params.userId;
     var reviewId=req.params.reviewId;
-    reviewModel.updateUpvote(reviewId)
+    //console.log(userId);
+    reviewModel.updateUpvote(reviewId,userId)
         .then(function (response) {
             res.json(response);
         });
 }
 
 function downVote(req,res) {
+    var userId=req.params.userId;
     var reviewId=req.params.reviewId;
-    reviewModel.updateDownvote(reviewId)
+    reviewModel.updateDownvote(reviewId,userId)
         .then(function (response) {
             res.json(response);
         });

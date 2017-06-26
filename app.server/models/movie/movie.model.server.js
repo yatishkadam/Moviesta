@@ -5,7 +5,6 @@ var movieModel=mongoose.model("movieModel",movieSchema);
 movieModel.createMovie=createMovie;
 movieModel.deleteMovie=deleteMovie;
 movieModel.updateMovie=updateMovie;
-movieModel.findMovieOnGenre=findMovieOnGenre;
 movieModel.findAllMovies=findAllMovies;
 movieModel.findMovieById=findMovieById;
 movieModel.updateRating=updateRating;
@@ -29,12 +28,6 @@ function deleteMovie(movieId) {
 
 function updateMovie(movieId,movie) {
     return movieModel.update({_id:movieId},{$set:movie});
-}
-
-function findMovieOnGenre(genre) {
-    return movieModel.find({'genre':genre})
-        .sort({rating:1})
-        .exec();
 }
 
 function findAllMovies() {

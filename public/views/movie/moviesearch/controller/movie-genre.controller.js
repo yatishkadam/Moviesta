@@ -3,11 +3,13 @@
         .module("Moviesta")
         .controller('movieGenreController',movieGenreController);
 
-    function movieGenreController($location,movieService,$routeParams) {
+    function movieGenreController($location,movieService,$routeParams,currentUser,userService) {
         var model = this;
+        model.user=currentUser;
         model.findGenreTMDB=findGenreTMDB;
         model.getMoviesForGenre=getMoviesForGenre;
         model.searchMovieTMDB=searchMovieTMDB;
+        model.logout=logout;
         function init() {
             model.genre = $routeParams['genreId'];
             model.title = $routeParams['genrename'];
@@ -36,6 +38,14 @@
 
         function searchMovieTMDB(title) {
             $location.url("/movie/search/"+title);
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url("/login");
+                });
         }
     }
 

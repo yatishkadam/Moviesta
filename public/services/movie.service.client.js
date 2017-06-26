@@ -13,6 +13,8 @@
         this.getCast=getCast;
         this.getTMDBRelatedMovies=getTMDBRelatedMovies;
         this.getCriticReviews=getCriticReviews;
+        this.getTopRatedMovies=getTopRatedMovies;
+        this.getDiscoverMovies=getDiscoverMovies;
 
         //find movie from tmdb
         function findMovieTMDB(title) {
@@ -62,6 +64,15 @@
                     return sendMovieList(data.results);
                 });
         }
+        //function to DiscoverMovies
+        function getDiscoverMovies() {
+            var url="/api/popularMovies";
+            return $http.get(url)
+                .then(function (response) {
+                    var data=response.data;
+                    return sendMovieList(data.results);
+                });
+        }
 
         //get movie details
         function getMovieDetails(movieId) {
@@ -104,6 +115,15 @@
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
+                });
+        }
+        // get top rated movies
+        function getTopRatedMovies() {
+            var url="/api/topMovies";
+            return $http.get(url)
+                .then(function (response) {
+                    var data=response.data;
+                    return sendMovieList(data.results);
                 });
         }
 

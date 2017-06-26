@@ -6,7 +6,7 @@ var cookieParser=require('cookie-parser');
 var session = require('express-session');
 
 app.use(cookieParser());
-app.use(session({secret:"something here"}));
+app.use(session({secret:process.env.SESSION_SECRET}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());

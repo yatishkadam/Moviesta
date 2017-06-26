@@ -18,13 +18,14 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="#!/movies/trailers"> TRAILERS</a></li>
+                <li><a href="#!/TopRated"> TopRated</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#!/" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-phone"></span> Contact</a></li>
-                <li><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                <li><a href="#!/register"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
+                <li><a ng-show="model.user._id" href="#!/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                <li><a ng-show="!model.user._id" href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a ng-show="!model.user._id" href="#!/register"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
+                <li><a ng-show="model.user._id" ng-click="model.logout()"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
             </ul>
 
         </div>
@@ -36,6 +37,7 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
+
 
 
 
@@ -55,7 +57,7 @@
                 <div class="text-center btn btn-link ">{{movie.title}}</div>
                 <div class="text-left">Release Date : {{movie.release_date |date:'mediumDate'}}</div>
                 <div>
-                    <span class="label label-success arrowed" ng-repeat="genre in movie.genre_ids">
+                    <span class="label label-success arrowed" ng-repeat="genre in movie.genre_ids | limitTo : 5">
                         <a href="#!/genre/movies/{{genre.id}}/{{genre.name}}">{{genre.name}}</a></span>
                 </div>
             </div>

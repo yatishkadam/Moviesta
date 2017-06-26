@@ -3,11 +3,11 @@ var reviewSchema = mongoose.Schema({
     _userId:{type:mongoose.Schema.Types.ObjectId,ref:"userModel"},
     _movieId:{type:mongoose.Schema.Types.ObjectId,ref:"movieModel"},
     tmdbMovieId:Number,
-    title:String,
+    author:String,
     rating:Number,
     content:String,
-    upVotes:{type:Number,default:0},
-    downVotes:{type:Number,default:0},
+    upVotes:[{type:mongoose.Schema.Types.ObjectId,ref:"userModel"}],
+    downVotes:[{type:mongoose.Schema.Types.ObjectId,ref:"userModel"}],
     tally:{type:Number,default:0}
 },{collection:"review"});
 
