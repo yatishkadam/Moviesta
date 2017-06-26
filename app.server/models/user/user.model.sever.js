@@ -23,6 +23,7 @@ module.exports=userModel;
 // crud and few other functions that can be performed on the database
 //create user
 function createUser(user) {
+    user.roles=["USER"];
     return userModel.create(user);
 }
 

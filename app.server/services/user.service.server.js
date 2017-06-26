@@ -63,7 +63,7 @@ function localStrategy(username,password, done) {
                     return done(null,user);
                 }
                 else{
-                    return done(null,false,{ message: 'Incorrect password.'});
+                    return done(null,false);
                 }
             },function (error) {
             return done(error,false);
@@ -152,6 +152,7 @@ function googleStrategy(token, refreshToken, profile, done) {
 
 function register(req, res) {
     var userObj = req.body;
+
     userObj.password = bcrypt.hashSync(userObj.password);
     userModel
         .createUser(userObj)
@@ -186,6 +187,7 @@ function loggedin(req, res) {
 //function to create user
 function createUser(req,res) {
     var newUser=req.body;
+
     userModel.createUser(newUser)
         .then(function (newUser) {
             res.json(newUser);

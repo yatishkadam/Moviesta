@@ -2,14 +2,13 @@ input.form-control {
     margin-bottom: 5px;
 }
 
-body {
-
+.bdy {
     padding-top: 56px;
 }
 
 @media (max-width: 768px){
 
-    body{
+    .bdy{
         padding-top: 125px;
     }
 
@@ -546,3 +545,8 @@ md-content h1:first-child {
     padding: 0 20px;
     margin-bottom: 17px;
 }
+
+.loginPage1{
+    padding-top: 56px;
+}
+

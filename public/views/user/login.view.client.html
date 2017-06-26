@@ -6,7 +6,7 @@
         </div>
     </div>
 </nav>
-
+<div class="loginPage1">
 <div class="container-fluid">
     <div class="card card-container3">
         <div class="row">
@@ -27,10 +27,6 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-4 col-sm-3 col-md-3">
-                        <span class="button-checkbox">
-                            <button type="button" class="btn" data-color="info" tabindex="7">Remember me</button>
-                            <input type="checkbox" name="t_and_c" id="t_and_c" class="hidden" value="1">
-                        </span>
                             </div>
                             <div class="hidden-xs col-sm-9 col-md-9">
                                 <a href="" class="btn btn-link pull-right">Forgot Password?</a>
@@ -65,72 +61,4 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    $(function () {
-        $('.button-checkbox').each(function () {
-
-            // Settings
-            var $widget = $(this),
-                $button = $widget.find('button'),
-                $checkbox = $widget.find('input:checkbox'),
-                color = $button.data('color'),
-                settings = {
-                    on: {
-                        icon: 'glyphicon glyphicon-check'
-                    },
-                    off: {
-                        icon: 'glyphicon glyphicon-unchecked'
-                    }
-                };
-
-            // Event Handlers
-            $button.on('click', function () {
-                $checkbox.prop('checked', !$checkbox.is(':checked'));
-                $checkbox.triggerHandler('change');
-                updateDisplay();
-            });
-            $checkbox.on('change', function () {
-                updateDisplay();
-            });
-
-            // Actions
-            function updateDisplay() {
-                var isChecked = $checkbox.is(':checked');
-
-                // Set the button's state
-                $button.data('state', (isChecked) ? "on" : "off");
-
-                // Set the button's icon
-                $button.find('.state-icon')
-                    .removeClass()
-                    .addClass('state-icon ' + settings[$button.data('state')].icon);
-
-                // Update the button's color
-                if (isChecked) {
-                    $button
-                        .removeClass('btn-default')
-                        .addClass('btn-' + color + ' active');
-                }
-                else {
-                    $button
-                        .removeClass('btn-' + color + ' active')
-                        .addClass('btn-default');
-                }
-            }
-
-            // Initialization
-            function init() {
-
-                updateDisplay();
-
-                // Inject the icon if applicable
-                if ($button.find('.state-icon').length == 0) {
-                    $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i>');
-                }
-            }
-            init();
-        });
-    });
-</script>
+</div>
