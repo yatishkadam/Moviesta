@@ -76,8 +76,8 @@ function updateUser(userId,newUser) {
 
 
 function addReviewUser(reviewId,userId) {
-    console.log(userId);
-    console.log(reviewId);
+    //console.log(userId);
+    //console.log(reviewId);
     return userModel.findOne({_id:userId})
         .then(function (user) {
             user.reviews.push(reviewId);
@@ -92,8 +92,8 @@ function deleteUser(userId) {
             //console.log("_____deleteUser_______/model/__");
             userModel.findById(userId)
                 .then(function (user) {
-                    console.log("inside delete user item=");
-                    console.log(user);
+                    //console.log("inside delete user item=");
+                    //console.log(user);
                     return userModel.remove({_id: user._id});
                     //console.log(user);
 

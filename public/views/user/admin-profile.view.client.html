@@ -7,9 +7,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#!/">
-                <span class="glyphicon glyphicon-home"></span></a>
-            <div class="navbar-brand text-center" style="margin-left: 30px"> Admin Page</div>
+                <a class="navbar-brand" href="#!/profile"><span class="glyphicon glyphicon-chevron-left"></span></a>
+            <div class="navbar-brand text-center" style="margin-left: 15px"> Admin Page</div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -23,9 +22,9 @@
 
 
 
-<div class="container-fluid">
+<div class="bdy container-fluid">
     <div class="row">
-        <div class="col-lg-9 col-sm-9 col-lg-offset-2 ">
+        <div class="col-lg-9 col-sm-9 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 ">
         <div ng-cloak>
             <md-content>
                 <md-tabs md-dynamic-height md-border-bottom>
@@ -49,19 +48,32 @@
                     </md-tab>
                     <md-tab label="Following">
                         <md-content class="md-padding">
-                            <div ng-show="!model.Following"><h2>No follows Yet!</h2></div>
-                            <div ng-repeat="user in model.Following">
+                            <div class="col-lg-5 col-md-6 hidden-xs hidden-sm"><h2>Follower</h2></div>
+                            <div class="col-lg-5 col-md-6 hidden-xs hidden-sm"><h2>Following</h2></div>
+                            <div ng-show="!model.follows"><h2>No follows Yet!</h2></div>
+                            <br>
+                            <div ng-repeat="user in model.follows">
                                 <div class="row">
-                                <a ng-click="model.unFollow(user._id)" class="btn btn-sm btn-danger  pull-right">unfollow</a>
-                                <div class="avatar1 pull-left">
-                                    <img ng-show="user.url" ng-src="{{user.url}}" src="{{user.url}}">
-                                    <img ng-show="!user.url" ng-src="./images/loginhead.jpg" src="./images/loginhead.jpg">
+                                <div class="col-lg-5 col-md-6 col-sm-6">
+                                <div class="avatar1">
+                                    <img ng-show="user.follower.url" ng-src="{{user.follower.url}}" src="{{user.follower.url}}">
+                                    <img ng-show="!user.follower.url" ng-src="./images/loginhead.jpg" src="./images/loginhead.jpg">
                                 </div>
-                                <h4 class="pull-left">
-                                    <a href="#!/profile/{{user._id}}" class="btn btn-link"> {{user.username}}</a>
+                                <h4>
+                                    <a href="#!/profile/{{user.follower._id}}" class="btn btn-link"> {{user.follower.username}}</a>
                                 </h4>
                                 </div>
-                                <hr>
+                                    <div class="col-lg-5 col-md-6 col-sm-6">
+                                        <div class="avatar1">
+                                            <img ng-show="user.following.url" ng-src="{{user.following.url}}" src="{{user.following.user.url}}">
+                                            <img ng-show="!user.following.url" ng-src="./images/loginhead.jpg" src="./images/loginhead.jpg">
+                                        </div>
+                                        <h4>
+                                            <a href="#!/profile/{{user.following._id}}" class="btn btn-link"> {{user.following.username}}</a>
+                                        </h4>
+                                    </div>
+                                <div class="col-lg-2  col-sm-offset-3"><a ng-click="model.deleteFollow(user._id)" class="btn btn-sm btn-danger">Delete</a></div>
+                            </div><hr>
                             </div>
                         </md-content>
                     </md-tab>

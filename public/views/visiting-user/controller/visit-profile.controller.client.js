@@ -72,8 +72,8 @@
 
         }
         function checkifFollow(userId,arr){
-            console.log("___checkIfFollow___");
-            console.log(arr);
+            //console.log("___checkIfFollow___");
+            //console.log(arr);
             for (var v in arr){
                 //console.log(model.Followers);
                 if (userId===arr[v]._id){
@@ -83,13 +83,13 @@
             return "";
         }
         function getFollowing(userId) {
-            console.log(userId);
+            //console.log(userId);
             DBService.getFollowing(userId)
                 .then(function (response) {
                     //console.log("____is following___");
                     model.Following=angular.copy(response.following);
                     model.isfollow=checkifFollow(model.userId,response.following);
-                    console.log(model.isfollow);
+                    //console.log(model.isfollow);
                 });
         }
 

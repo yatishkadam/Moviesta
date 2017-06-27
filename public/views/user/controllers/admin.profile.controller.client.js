@@ -15,9 +15,12 @@
         model.getReviewById=getReviewById;
         model.reviewUpdate=reviewUpdate;
         model.reviewDelete=reviewDelete;
+        model.getAllFollow=getAllFollow;
+        model.deleteFollow=deleteFollow;
         function init() {
             getAllUsers();
             getAllReviews();
+            getAllFollow();
         }
         init();
 
@@ -97,6 +100,22 @@
             adminService.deleteUserReview(reviewId)
                 .then(function (response) {
                     init();
+                });
+        }
+
+        function getAllFollow() {
+            //console.log("__getAllFollows__");
+         adminService.getAllFollows()
+             .then(function (follows) {
+                 model.follows=angular.copy(follows);
+             console.log(follows);
+
+         });
+        }
+        function deleteFollow(followId) {
+            adminService.deleteFollow(followId)
+                .then(function () {
+                   init();
                 });
         }
 

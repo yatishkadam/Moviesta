@@ -8,10 +8,19 @@ followModel.deleteFollow=deleteFollow;
 followModel.findAllFollowing=findAllFollowing;
 followModel.findAllFollowers=findAllFollowers;
 followModel.deleteFollowing=deleteFollowing;
+followModel.getAllFollow=getAllFollow;
+followModel.deleteFollows=deleteFollows;
 module.exports = followModel;
 
 
 //crud operations
+
+function getAllFollow() {
+    return followModel.find()
+        .populate('follower')
+        .populate('following')
+        .exec();
+}
 
 //create Follow
 function createFollow(newFollow) {
@@ -22,6 +31,11 @@ function createFollow(newFollow) {
                 followModel.create(newFollow);
             }
         });
+}
+
+//delete follows
+function deleteFollows(followId) {
+    return followModel.remove({_id:followId});
 }
 
 

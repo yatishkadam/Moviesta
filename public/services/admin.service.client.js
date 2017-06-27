@@ -10,7 +10,8 @@
         this.deleteProfile=deleteProfile;
         this.getAllReviews=getAllReviews;
         this.deleteUserReview=deleteUserReview;
-
+        this.getAllFollows=getAllFollows;
+        this.deleteFollow=deleteFollow;
 
 
         function deleteUserReview(reviewId) {
@@ -18,6 +19,15 @@
             return $http.delete(url)
                 .then(function (response) {
                     return response;
+                });
+        }
+
+        function getAllFollows() {
+            var url="/api/getallfollow";
+            return $http.get(url)
+                .then(function (response) {
+                    console.log(response.data);
+                   return response.data;
                 });
         }
 
@@ -56,6 +66,15 @@
                     return response.data;
                 });
 
+        }
+        //function to delete follow
+        function deleteFollow(followId) {
+            var url="/api/deletefollow/"+followId;
+            return $http.delete(url)
+                .then(function (response) {
+                        return response.data;
+                    }
+                );
         }
 
 

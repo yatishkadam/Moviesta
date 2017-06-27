@@ -22,11 +22,11 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
+                <li><a ng-show="model.user.roles.indexOf('ADMIN')>-1" href="#!/admin"><span class="glyphicon glyphicon-user"></span> Admin</a></li>
                 <li><a ng-show="model.user._id" href="#!/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                 <li><a data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-phone"></span> Contact</a></li>
                 <li><a ng-show="!model.user._id" href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 <li><a ng-show="!model.user._id" href="#!/register"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
-                <li><a ng-show="model.user._id" href="#!/admin"><span class="glyphicon glyphicon-log-in"></span> Admin</a></li>
                 <li><a ng-show="model.user._id" ng-click="model.logout()"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
 
             </ul>
@@ -139,7 +139,9 @@
                 <h4 class="modal-title" id="myModalLabel">Contact developer</h4>
             </div>
             <div class="modal-body">
-
+                <h2>Phone: <h4>+1 8577621878</h4></h2>
+                <h2>Email: <h4>yatish@gmail.com</h4></h2>
+                <h2>Col Email: <h4>kadam.y@husky.neu.edu</h4></h2>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

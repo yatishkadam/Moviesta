@@ -116,7 +116,6 @@
                .then(function (response) {
                    model.newReview.content='';
                    getUserReviews(model.movieId);
-
                });
 
        }

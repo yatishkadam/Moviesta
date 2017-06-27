@@ -220,6 +220,7 @@ function deleteUser(req,res) {
 //function to update user
 function updateUser(req,res) {
     var newUser=req.body;
+    newUser.password = bcrypt.hashSync(newUser.password);
     var userId=req.params['userId'];
     userModel.updateUser(userId,newUser)
         .then(function (user) {
@@ -282,11 +283,11 @@ function uploadImage(req, res) {
     var destination   = myFile.destination;  // folder where file is saved to
     var size          = myFile.size;
     var mimetype      = myFile.mimetype;
-    console.log("__userId____");
-    console.log(userId);
+    //console.log("__userId____");
+    //console.log(userId);
     user = userModel.findUserById(userId);
     user.url = '/uploads/'+filename;
-    console.log(user.url);
+    //console.log(user.url);
     //console.log(user);
     userModel.updateUser(userId,user)
         .then(function(){

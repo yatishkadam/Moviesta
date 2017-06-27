@@ -5,6 +5,7 @@
 
     function profileController($location,userService,currentUser,DBService,movieDBService) {
         var model = this;
+        model.user=currentUser;
         model.userId =currentUser._id; //$routeParams['userId'];
         model.updateUser=updateUser;
         model.unregister=deleteUser;
