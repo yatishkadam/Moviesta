@@ -254,51 +254,6 @@ md-content h1:first-child {
     margin-top: 0; }
 
 
-/* side bar nav*/
-
-.sidebar1 {
-    background: black;
-    /* For browsers that do not support gradients */
-    /* Standard syntax */
-    position:absolute;
-    top:40px;
-    bottom:0;
-    left:0;
-    right:0;
-    overflow:hidden;
-    z-index: 0;
-}
-.logo {
-    max-height: 130px;
-}
-.logo>img {
-    margin-top: 30px;
-    padding: 3px;
-    border: 3px solid white;
-    border-radius: 100%;
-}
-.list {
-    color: #fff;
-    list-style: none;
-    padding-left: 0px;
-}
-.list::first-line {
-    color: rgba(255, 255, 255, 0.5);
-}
-.list> li, h5 {
-    padding: 5px 0px 5px 40px;
-}
-.list>li:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-left: 5px solid white;
-    color: white;
-    font-weight: bolder;
-    padding-left: 35px;
-}.main-content{
-     text-align:center;
- }
-
-
 
 
 
@@ -508,10 +463,10 @@ md-content h1:first-child {
 }
 
 .card.hovercard .avatar img {
-    width: 120px;
-    height: 120px;
-    max-width: 100px;
-    max-height: 100px;
+    width: 160px;
+    height: 160px;
+    max-width: 200px;
+    max-height: 200px;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;

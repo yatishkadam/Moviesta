@@ -288,25 +288,31 @@ function findAllUsers(req,res) {
 
 
 function uploadImage(req, res) {
-    var myFile        = req.file;
-    var userId = req.body.userId;
-    var originalname  = myFile.originalname; // file name on user's computer
-    var filename      = myFile.filename;     // new file name in upload folder
-    var path          = myFile.path;         // full path of uploaded file
-    var destination   = myFile.destination;  // folder where file is saved to
-    var size          = myFile.size;
-    var mimetype      = myFile.mimetype;
-    //console.log("__userId____");
-    //console.log(userId);
-    user = userModel.findUserById(userId);
-    user.url = '/uploads/'+filename;
-    //console.log(user.url);
-    //console.log(user);
-    userModel.updateUser(userId,user)
-        .then(function(){
-            var callbackUrl= "/#!/profile";
-            res.redirect(callbackUrl);
-        });
+    var myFile = req.file;
+    if (typeof myFile === "undefined") {
+        var callbackUrl = "/#!/profile";
+        res.redirect(callbackUrl);
+    }
+    else {
+        var userId = req.body.userId;
+        var originalname = myFile.originalname; // file name on user's computer
+        var filename = myFile.filename;     // new file name in upload folder
+        var path = myFile.path;         // full path of uploaded file
+        var destination = myFile.destination;  // folder where file is saved to
+        var size = myFile.size;
+        var mimetype = myFile.mimetype;
+        //console.log("__userId____");
+        //console.log(userId);
+        user = userModel.findUserById(userId);
+        user.url = '/uploads/' + filename;
+        //console.log(user.url);
+        //console.log(user);
+        userModel.updateUser(userId, user)
+            .then(function () {
+                var callbackUrl = "/#!/profile";
+                res.redirect(callbackUrl);
+            });
+    }
 }
 
 
