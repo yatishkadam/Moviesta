@@ -3,7 +3,7 @@
         .module("Moviesta")
         .controller('adminprofileController',adminprofileController);
 
-    function adminprofileController($location,userService,currentUser,DBService,movieDBService,adminService) {
+    function adminprofileController($location,$mdDialog,userService,currentUser,DBService,movieDBService,adminService) {
         var model = this;
         model.user =currentUser; //$routeParams['userId'];
         model.getUserByid=getUserByid;
@@ -85,15 +85,45 @@
         }
 
         function getProfile(userId) {
-            //console.log(model.user._id);
             //console.log(userId);
-            if(userId===model.user._id){
+            //console.log(model.user._id);
+            if(userId==model.user._id){
                 $location.url("/profile");
             }
             else {
-                $location.url("/profile/"+userId);
+                checkifCurrentUser(userId);
             }
         }
+
+        function checkifCurrentUser(userId){
+            userService.findUserById(userId)
+                .then(function(response){
+                    if (response===null){
+                        model.error=true;
+                    }
+                    else {
+                        $location.url("/profile/"+response._id);
+                    }
+                });
+
+        }
+        model.showAlert = function(ev) {
+            model.error=false;
+            // Appending dialog to document.body to cover sidenav in docs app
+            // Modal dialogs should fully cover application
+            // to prevent interaction outside of dialog
+            $mdDialog.show(
+                $mdDialog.alert()
+                    .parent(angular.element(document.querySelector('#popupContainer')))
+                    .clickOutsideToClose(true)
+                    .title('Sorry!!!')
+                    .textContent('user is not registered with us anymore!!!!!' +
+                        '  go ahead and delete the user')
+                    .ariaLabel('Alert Dialog Demo')
+                    .ok('Got it!')
+                    .targetEvent(ev)
+            );
+        };
         function getReviewById(reviewId) {
             DBService.getReviewById(reviewId)
                 .then(function(response){

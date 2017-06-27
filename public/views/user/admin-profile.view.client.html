@@ -78,6 +78,10 @@
                         </md-content>
                     </md-tab>
                     <md-tab label="All Reviews">
+                        <div class="dialog-demo-content" layout="row" layout-wrap layout-margin layout-align="center">
+                            <div ng-if="model.error" class="md-primary md-raised" ng-show="!tempVar || model.showAlert($event); tempVar=true;">
+                            </div>
+                        </div>
                         <div ng-show="!model.allReviews"><h2>No reviews !</h2></div>
                         <md-content class="md-padding">
                             <div ng-repeat="review in model.allReviews">
