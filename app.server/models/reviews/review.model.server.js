@@ -29,7 +29,7 @@ function createReview(review){
             // console.log(review._id);
             movieModel.addReview(review.tmdbMovieId, review._id)
                 .then(function (resposne) {
-                    console.log(resposne);
+                    //console.log(resposne);
                     userModel.addReviewUser(review._id,review._userId);
                     //console.log("____AFTER ADD REVIEW CALL_____");
                 });

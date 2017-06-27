@@ -155,22 +155,24 @@
                             </div>
                         </md-content>
                     </md-tab>
-                    <md-tab ng-if="(model.user.roles.indexOf('CRITIC')>-1)" label="Other Reviews">
+                    <md-tab ng-if="(model.user.roles.indexOf('CRITIC')>-1)" label="Other CRITIC Reviews">
                         <div ng-show="!model.allReviews"><h2>No reviews !</h2></div>
                         <md-content class="md-padding">
                             <div ng-repeat="review in model.allReviews">
-                                <h4>Movie :
-                                    <a href="#!/movies/{{review.tmdbMovieId}}" class="btn btn-link"> {{review.movieName}}</a>
-                                    Author :<a ng-click="model.getProfile(review._userId)" class="btn btn-link"> {{review.author}}</a>
-                                    <a ng-click="model.reviewDownVote(review._id)">
-                                        <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.downVotes.length}}</i>
-                                    </a>
-                                    <a ng-click="model.reviewUpVote(review._id)">
-                                        <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.upVotes.length}}</i>
-                                    </a>
-                                </h4>
-                                <h4>Content :</h4> <p>{{review.content}}</p>
-                                <hr>
+                                <div ng-if="(review.authorRole==='CRITIC')">
+                                    <h4>Movie :
+                                        <a href="#!/movies/{{review.tmdbMovieId}}" class="btn btn-link"> {{review.movieName}}</a>
+                                        Author :<a ng-click="model.getProfile(review._userId)" class="btn btn-link"> {{review.author}}</a>
+                                        <a ng-click="model.reviewDownVote(review._id)">
+                                            <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.downVotes.length}}</i>
+                                        </a>
+                                        <a ng-click="model.reviewUpVote(review._id)">
+                                            <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.upVotes.length}}</i>
+                                        </a>
+                                    </h4>
+                                    <h4>Content :</h4> <p>{{review.content}}</p>
+                                    <hr>
+                                </div>
                             </div>
                         </md-content>
                     </md-tab>
