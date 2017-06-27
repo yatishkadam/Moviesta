@@ -15,6 +15,7 @@
         model.followUser=followUser;
         model.unFollow=unFollow;
         model.getProfile=getProfile;
+        model.getFollowingVisitUser=getFollowingVisitUser;
 
 
         function init() {
@@ -67,7 +68,7 @@
                 .then(function (response) {
                     //console.log(response.follower);
                     model.Followers=angular.copy(response.follower);
-                    model.isfollow=checkifFollow(model.userId,response.follower);
+                    getFollowingVisitUser(model.userId);
                 });
 
         }
@@ -88,7 +89,15 @@
                 .then(function (response) {
                     //console.log("____is following___");
                     model.Following=angular.copy(response.following);
-                    model.isfollow=checkifFollow(model.userId,response.following);
+                    getFollowingVisitUser(model.userId);
+                    //console.log(model.isfollow);
+                });
+        }
+        function getFollowingVisitUser(userId) {
+            DBService.getFollowing(userId)
+                .then(function (response) {
+                    //console.log(response);
+                    model.isfollow=checkifFollow(model.vUserId,response.following);
                     //console.log(model.isfollow);
                 });
         }
@@ -99,7 +108,7 @@
             DBService.followUser(model.userId,model.vUserId)
                 .then(function (response) {
                     //console.log(response);
-                   getFollowers(model.vUserId);
+                    init();
                 });
         }
 

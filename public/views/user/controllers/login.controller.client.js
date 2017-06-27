@@ -12,7 +12,12 @@
                         userService
                             .login(user.username,user.password)
                             .then(function (response) {
-                                $location.url("/profile");
+                                if(response===""){
+                                    model.message = "Wrong username or password.";
+                                }
+                                else {
+                                    $location.url("/profile");
+                                }
                             }, function (err) {
                                 model.message = "Wrong username or password.";
                             });
