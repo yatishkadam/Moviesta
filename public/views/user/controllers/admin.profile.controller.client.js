@@ -42,16 +42,26 @@
             //console.log(userId);
             adminService.getUserByid(userId)
                 .then(function (user) {
-                    console.log(user);
+                    //console.log(user);
                     model.editUser=angular.copy(user);
                 });
         }
 
         function updateProfile(userId,user) {
-            //console.log(userId);
-            //console.log(user);
-            var role=user.roles.split(",");
-            user.roles=role;
+            if (typeof user.roles==="object"){
+                console.log();
+            }
+            else
+            {
+                var r=[];
+                var role=user.roles.split(",");
+                role.forEach(function (item) {
+                    if (item==="ADMIN"||item==="USER"||item==="CRITIC"){
+                        r.push(item);
+                    }
+                });
+                user.roles=r;
+            }
             adminService.updateProfile(userId,user)
                 .then(function (user) {
                     //console.log(user);
@@ -59,7 +69,7 @@
                 });
         }
         function deleteProfile(userId) {
-            console.log(userId);
+            //console.log(userId);
             adminService.deleteProfile(userId)
                 .then(function (response) {
                     init();
@@ -75,8 +85,8 @@
         }
 
         function getProfile(userId) {
-            console.log(model.user._id);
-            console.log(userId);
+            //console.log(model.user._id);
+            //console.log(userId);
             if(userId===model.user._id){
                 $location.url("/profile");
             }
@@ -108,7 +118,7 @@
          adminService.getAllFollows()
              .then(function (follows) {
                  model.follows=angular.copy(follows);
-             console.log(follows);
+             //console.log(follows);
 
          });
         }

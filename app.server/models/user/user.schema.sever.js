@@ -8,7 +8,7 @@ var userSchema = mongoose.Schema({
     url: String,
     phone:String,
     reviews:[{type:mongoose.Schema.Types.ObjectId,ref : "reviewModel"}],
-    roles: [{type:String,default:'USER',enum : ['USER','ADMIN']}],
+    roles: [{type:String,default:'USER',enum : ['USER','CRITIC','ADMIN']}],
     dateCreated:{type:String,default:Date.now},
     google : {
         id:String,

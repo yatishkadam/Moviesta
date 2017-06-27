@@ -220,7 +220,7 @@ function deleteUser(req,res) {
 //function to update user
 function updateUser(req,res) {
     var newUser=req.body;
-    newUser.password = bcrypt.hashSync(newUser.password);
+    //newUser.password = bcrypt.hashSync(newUser.password);
     var userId=req.params['userId'];
     userModel.updateUser(userId,newUser)
         .then(function (user) {

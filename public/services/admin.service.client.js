@@ -26,7 +26,7 @@
             var url="/api/getallfollow";
             return $http.get(url)
                 .then(function (response) {
-                    console.log(response.data);
+                    //console.log(response.data);
                    return response.data;
                 });
         }

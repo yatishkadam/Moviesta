@@ -58,6 +58,7 @@
                     </div>
                     <div class="desc">{{model.user.username}}</div>
                     <div class="desc">{{model.user.email}}</div>
+                    <div class="desc" ng-repeat="role in model.user.roles">{{role}}</div>
                 </div>
             </div>
 
@@ -140,7 +141,8 @@
                                 <a ng-click="model.getReviewById(review._id)" data-toggle="modal" data-target="#editReview" class="btn btn-primary btn-sm pull-right" style="margin-left: 4px">
                                     <i class="fa fa-pencil " aria-hidden="true"></i>
                                 </a>
-                                <h4><a href="#!/movies/{{review.tmdbMovieId}}" class="btn btn-link"> {{review.movieName}}</a>
+                                <h4>Movie :
+                                    <a href="#!/movies/{{review.tmdbMovieId}}" class="btn btn-link"> {{review.movieName}}</a>
                                     <a ng-click="model.reviewDownVote(review._id)">
                                         <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.downVotes.length}}</i>
                                     </a>
@@ -148,10 +150,28 @@
                                         <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.upVotes.length}}</i>
                                     </a>
                                 </h4>
-                                <p>{{review.content}}</p>
+                                <h4>Content :</h4> <p>{{review.content}}</p>
                                 <hr>
                             </div>
-
+                        </md-content>
+                    </md-tab>
+                    <md-tab ng-if="(model.user.roles.indexOf('CRITIC')>-1)" label="Other Reviews">
+                        <div ng-show="!model.allReviews"><h2>No reviews !</h2></div>
+                        <md-content class="md-padding">
+                            <div ng-repeat="review in model.allReviews">
+                                <h4>Movie :
+                                    <a href="#!/movies/{{review.tmdbMovieId}}" class="btn btn-link"> {{review.movieName}}</a>
+                                    Author :<a ng-click="model.getProfile(review._userId)" class="btn btn-link"> {{review.author}}</a>
+                                    <a ng-click="model.reviewDownVote(review._id)">
+                                        <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.downVotes.length}}</i>
+                                    </a>
+                                    <a ng-click="model.reviewUpVote(review._id)">
+                                        <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.upVotes.length}}</i>
+                                    </a>
+                                </h4>
+                                <h4>Content :</h4> <p>{{review.content}}</p>
+                                <hr>
+                            </div>
                         </md-content>
                     </md-tab>
 

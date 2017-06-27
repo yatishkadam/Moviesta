@@ -3,7 +3,7 @@
        .module("Moviesta")
        .controller('moviePageController',moviePageController);
 
-   function moviePageController($routeParams,$location,movieService,movieDBService,currentUser,userService) {
+   function moviePageController($routeParams,$location,$mdDialog,movieService,movieDBService,currentUser,userService) {
       var model =this;
       model.user=currentUser;
       console.log(model.user);
@@ -18,6 +18,7 @@
       model.logout=logout;
       model.createReview=createReview;
       model.getProfile=getProfile;
+      model.checkifCurrentUser=checkifCurrentUser;
       model.movieId=$routeParams.movieId;
       function init() {
           getMovieDetails(model.movieId);
@@ -80,9 +81,16 @@
 
 
        function getUserReviews(movieId) {
+           model.criticReviews=[];
            movieDBService.getUserReviews(movieId)
                .then(function (response) {
                    //console.log(response);
+                   response.forEach(function (review) {
+                      if (review.authorRole==="CRITIC"){
+                          model.criticReviews.push(review);
+                      }
+                   });
+                   console.log(model.criticReviews);
                    model.UserReviews=angular.copy(response);
                });
        }
@@ -111,6 +119,14 @@
            review.author=model.user.firstName;
            review._userId=model.user._id;
            review.movieName=model.movie.title;
+           if (model.user.roles.indexOf("CRITIC")>-1)
+           {
+               review.authorRole='CRITIC';
+           }
+           else
+           {
+               review.authorRole='USER';
+           }
            review._movieId=model.movie._id;
            movieDBService.createReview(review)
                .then(function (response) {
@@ -143,10 +159,40 @@
            if(userId===model.user._id){
                $location.url("/profile");
            }
-           else {
-               $location.url("/profile/"+userId);
+            {
+               checkifCurrentUser(userId);
            }
        }
+
+       function checkifCurrentUser(userId){
+           userService.findUserById(userId)
+               .then(function(response){
+                   if (response===null){
+                       model.error=true;
+                   }
+                   else {
+                       $location.url("/profile/"+response._id);
+                   }
+               });
+
+       }
+           model.showAlert = function(ev) {
+               model.error=false;
+               // Appending dialog to document.body to cover sidenav in docs app
+               // Modal dialogs should fully cover application
+               // to prevent interaction outside of dialog
+               $mdDialog.show(
+                   $mdDialog.alert()
+                       .parent(angular.element(document.querySelector('#popupContainer')))
+                       .clickOutsideToClose(true)
+                       .title('Sorry!!!')
+                       .textContent('user is not registered with us anymore!!!!!')
+                       .ariaLabel('Alert Dialog Demo')
+                       .ok('Got it!')
+                       .targetEvent(ev)
+               );
+           };
+
    }
 
 

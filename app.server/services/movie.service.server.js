@@ -16,7 +16,7 @@ function createMovie(req,res) {
     //console.log(movie);
     movieModel.createMovie(movie)
         .then(function (response) {
-            console.log(response);
+            //console.log(response);
             //console.log(response);
             res.json(response);
         },function (response) {

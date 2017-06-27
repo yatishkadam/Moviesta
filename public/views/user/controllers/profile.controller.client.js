@@ -3,7 +3,7 @@
         .module("Moviesta")
         .controller('profileController',profileController);
 
-    function profileController($location,userService,currentUser,DBService,movieDBService) {
+    function profileController($location,userService,currentUser,DBService,movieDBService,adminService) {
         var model = this;
         model.user=currentUser;
         model.userId =currentUser._id; //$routeParams['userId'];
@@ -20,12 +20,14 @@
         model.getFollowing=getFollowing;
         model.getFollowers=getFollowers;
         model.unFollow=unFollow;
+        model.getAllReviews=getAllReviews;
 
         function init() {
             renderUser(currentUser);
             getReviewsForUser(model.userId);
             getFollowers(model.userId);
-            getFollowing(model.userId)
+            getFollowing(model.userId);
+            getAllReviews();
         }
         init();
         // userService
@@ -97,6 +99,7 @@
             movieDBService.reviewDownVote(reviewId,model.user._id)
                 .then(function (response) {
                         getReviewsForUser(model.userId);
+                        getAllReviews();
                     },
                     function (response) {
                         //console.log(response);
@@ -107,6 +110,7 @@
             movieDBService.reviewUpVote(reviewId,model.user._id)
                 .then(function(response){
                         getReviewsForUser(model.userId);
+                        getAllReviews();
                     },
                     function (response) {
                         //console.log(response);
@@ -141,6 +145,13 @@
                 .logout()
                 .then(function () {
                     $location.url("/login");
+                });
+        }
+
+        function getAllReviews() {
+            adminService.getAllReviews()
+                .then(function (reviews) {
+                    model.allReviews=angular.copy(reviews);
                 });
         }
 

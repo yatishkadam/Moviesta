@@ -92,6 +92,19 @@
                                 <md-content class="md-padding">
                                         <h3>CRITIC REVIEWS</h3>
                                         <hr class="colorgraph">
+                                    <div ng-repeat="review in model.criticReviews">
+                                        <span class="glyphicon glyphicon-user"></span> Author :<a ng-click="model.getProfile(review._userId)" class="btn btn-link">
+                                        {{review.author}}</a>
+                                        <a ng-click="model.reviewDownVote(review._id)">
+                                            <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.downVotes.length}}</i>
+                                        </a>
+                                        <a ng-click="model.reviewUpVote(review._id)">
+                                            <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.upVotes.length}}</i>
+                                        </a>
+                                        </h4>
+                                        <p>{{review.content}}</p>
+                                        <hr>
+                                    </div>
                                         <div ng-repeat="review in model.reviews | limitTo : 3">
                                             <h4><span class="glyphicon glyphicon-user"> {{review.author}}</span></h4>
                                             <p>{{review.content}}</p>
@@ -100,19 +113,26 @@
                             </md-tab>
                             <md-tab label="User Reviews">
                                 <md-content class="md-padding">
+                                    <div class="dialog-demo-content" layout="row" layout-wrap layout-margin layout-align="center">
+                                        <div ng-if="model.error" class="md-primary md-raised" ng-show="model.showAlert($event)">
+                                        </div>
+                                    </div>
                                     <h3>USER REVIEWS</h3>
                                     <hr class="colorgraph">
                                     <div ng-repeat="review in model.UserReviews">
-                                        <h4><a ng-click="model.getProfile(review._userId)"><span class="glyphicon glyphicon-user btn btn-link"> {{review.author}}</span></a>
+                                        <div ng-if="(review.authorRole==='USER')">
+                                            Author :<a ng-click="model.getProfile(review._userId)" class="btn btn-link">
+                                            {{review.author}}</a>
                                             <a ng-click="model.reviewDownVote(review._id)">
                                                 <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.downVotes.length}}</i>
                                             </a>
                                             <a ng-click="model.reviewUpVote(review._id)">
                                                 <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.upVotes.length}}</i>
                                             </a>
-                                        </h4>
-                                        <p>{{review.content}}</p>
-                                        <hr>
+                                            </h4>
+                                            <p>{{review.content}}</p>
+                                            <hr>
+                                        </div>
                                     </div>
                                 </md-content>
                             </md-tab>

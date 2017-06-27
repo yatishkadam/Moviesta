@@ -23,7 +23,7 @@ function getFollowers(req,res) {
 function getAllFollow(req,res) {
     followModel.getAllFollow()
         .then(function (response) {
-            console.log(response);
+            //console.log(response);
             res.json(response);
         });
 }

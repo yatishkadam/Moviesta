@@ -5,6 +5,7 @@ var reviewSchema = mongoose.Schema({
     tmdbMovieId:Number,
     movieName:String,
     author:String,
+    authorRole:String,
     rating:Number,
     content:String,
     upVotes:[{type:mongoose.Schema.Types.ObjectId,ref:"userModel"}],
