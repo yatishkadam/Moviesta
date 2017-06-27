@@ -118,7 +118,7 @@
                     .clickOutsideToClose(true)
                     .title('Sorry!!!')
                     .textContent('user is not registered with us anymore!!!!!' +
-                        '  go ahead and delete the user')
+                        '  go ahead and delete the Review')
                     .ariaLabel('Alert Dialog Demo')
                     .ok('Got it!')
                     .targetEvent(ev)
