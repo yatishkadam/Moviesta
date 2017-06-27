@@ -6,7 +6,7 @@
    function moviePageController($routeParams,$location,$mdDialog,movieService,movieDBService,currentUser,userService) {
       var model =this;
       model.user=currentUser;
-      console.log(model.user);
+      //console.log(model.user);
       model.getMoviesForGenre=getMoviesForGenre;
       model.getMovieDetails=getMovieDetails;
       model.searchMovieTMDB=searchMovieTMDB;
@@ -90,7 +90,7 @@
                           model.criticReviews.push(review);
                       }
                    });
-                   console.log(model.criticReviews);
+                   //console.log(model.criticReviews);
                    model.UserReviews=angular.copy(response);
                });
        }
@@ -156,10 +156,10 @@
        function getProfile(userId) {
           //console.log(userId);
           //console.log(model.user._id);
-           if(userId===model.user._id){
+           if(userId==model.user._id){
                $location.url("/profile");
            }
-            {
+            else {
                checkifCurrentUser(userId);
            }
        }

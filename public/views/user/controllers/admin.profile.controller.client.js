@@ -56,8 +56,8 @@
                 var r=[];
                 var role=user.roles.split(",");
                 role.forEach(function (item) {
-                    if (item==="ADMIN"||item==="USER"||item==="CRITIC"){
-                        r.push(item);
+                    if (item.toUpperCase()==="ADMIN"||item.toUpperCase()==="USER"||item.toUpperCase()==="CRITIC"){
+                        r.push(item.toUpperCase());
                     }
                 });
                 user.roles=r;
