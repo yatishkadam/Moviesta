@@ -21,6 +21,7 @@
         model.getFollowers=getFollowers;
         model.unFollow=unFollow;
         model.getAllReviews=getAllReviews;
+        model.passwordUpdate=passwordUpdate;
 
         function init() {
             renderUser(currentUser);
@@ -120,7 +121,7 @@
         function getFollowers(userId) {
             DBService.getFollowers(userId)
                 .then(function (response) {
-                    console.log(response.follower);
+                    //console.log(response.follower);
                    model.Followers=angular.copy(response.follower);
 
                 });
@@ -157,6 +158,22 @@
 
         function searchMovieTMDB(title) {
             $location.url("/movie/search/"+title);
+        }
+
+        function passwordUpdate(password){
+            console.log(password);
+            if(typeof password==="undefined"){
+                model.sucess="password cannot be empty";
+            }
+            else {
+                model.user.password=password;
+                userService.passwordUpdate(model.user)
+                    .then(function (response) {
+                        init();
+                    });
+            }
+
+
         }
     }
 

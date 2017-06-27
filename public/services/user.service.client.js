@@ -14,6 +14,7 @@
         this.findUserById=findUserById;
         this.updateUser=updateUser;
         this.checkAdmin=checkAdmin;
+        this.passwordUpdate=passwordUpdate;
 
             //funtion to register user
         function register(user) {
@@ -23,6 +24,13 @@
                     return response.data;
                 });
 
+        }
+        function passwordUpdate(user) {
+            var url="/api/updatepassword";
+            return $http.put(url,user)
+                .then(function (response) {
+                    return response.data;
+                });
         }
 
         //find user by username

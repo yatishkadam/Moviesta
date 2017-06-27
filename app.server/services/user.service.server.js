@@ -25,6 +25,7 @@ app.get    ("/auth/google",passport.authenticate('google',{scope:['profile','ema
 
 app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 app.get ('/api/getallusers',findAllUser);
+app.put ('/api/updatepassword',updatepassword);
 
 app.get('/auth/google/callback',
     passport.authenticate('google', {
@@ -228,6 +229,18 @@ function updateUser(req,res) {
             res.json(user);
         });
 }
+
+
+function updatepassword(req,res) {
+    var newUser=req.body;
+    newUser.password = bcrypt.hashSync(newUser.password);
+    userModel.updateUser(newUser._id,newUser)
+        .then(function (user) {
+            //console.log(user);
+            res.json(user);
+        });
+}
+
 
 //function to find the user by id
 function findUserById(req,res) {
