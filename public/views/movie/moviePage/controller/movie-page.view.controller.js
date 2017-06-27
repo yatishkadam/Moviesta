@@ -3,7 +3,7 @@
        .module("Moviesta")
        .controller('moviePageController',moviePageController);
 
-   function moviePageController($routeParams,$location,$mdDialog,movieService,hmovieDBService,currentUser,userService) {
+   function moviePageController($routeParams,$location,$mdDialog,movieService,movieDBService,currentUser,userService) {
       var model =this;
       model.user=currentUser;
        model.movieId=$routeParams.movieId;
