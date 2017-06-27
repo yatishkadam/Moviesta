@@ -4,6 +4,8 @@ var userModel=mongoose.model("userModel",userSchema);
 var followModel=require("../follow/follow.model.server");
 var reviewModel=require("../reviews/review.model.server");
 var bcrypt = require("bcrypt-nodejs");
+
+
 userModel.createUser=createUser;
 userModel.findUserById=findUserById;
 userModel.findAllUser=findAllUser;

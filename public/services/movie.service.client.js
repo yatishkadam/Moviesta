@@ -3,6 +3,8 @@
         .module("Moviesta")
         .service("movieService",movieService);
     function movieService($http) {
+
+
         this.findMovieTMDB=findMovieTMDB;
         this.getgenreTMDB=getgenreTMDB;
         this.findGenreTMDB=findGenreTMDB;

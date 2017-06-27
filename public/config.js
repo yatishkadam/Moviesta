@@ -99,7 +99,7 @@
             });
 
 
-
+        //check if logged in
         function checkLoggedIn(userService,$q,$location) {
             var deferred=$q.defer();
             userService
@@ -115,6 +115,7 @@
                 });
             return deferred.promise;
         }
+        // to make the current user available
         function checkCurrentUser(userService,$q,$location) {
             var deferred=$q.defer();
             userService
@@ -130,7 +131,7 @@
                 });
             return deferred.promise;
         }
-
+        // to check if the admin is logged in
         function checkAdmin($q, $location, userService) {
             var deferred = $q.defer();
             userService

@@ -5,6 +5,7 @@
     function homeController($location,movieService,currentUser,userService) {
         var model=this;
         model.user=currentUser;
+
         model.logout=logout;
         model.searchMovieTMDB=searchMovieTMDB;
         model.getNewMovies=getNewMovies;
@@ -30,8 +31,6 @@
         function getNewMovies(){
             movieService.getNewMovies()
                 .then(function (response) {
-                        //console.log(response);
-                        //console.log(response.results);
                         model.TMDBmovies = response;
 
                 });

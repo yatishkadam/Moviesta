@@ -11,7 +11,6 @@ app.get    ("/api/getRating/:movieId",getMovieRating);
 
 
 function createMovie(req,res) {
-    //console.log("____________createMovies_________");
     var movie=req.body;
     //console.log(movie);
     movieModel.createMovie(movie)

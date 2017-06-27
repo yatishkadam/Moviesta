@@ -6,10 +6,13 @@
     function movieGenreController($location,movieService,$routeParams,currentUser,userService) {
         var model = this;
         model.user=currentUser;
+
         model.findGenreTMDB=findGenreTMDB;
         model.getMoviesForGenre=getMoviesForGenre;
         model.searchMovieTMDB=searchMovieTMDB;
         model.logout=logout;
+
+
         function init() {
             model.genre = $routeParams['genreId'];
             model.title = $routeParams['genrename'];

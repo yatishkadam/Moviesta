@@ -3,12 +3,13 @@
         .module("Moviesta")
         .service("movieDBService", movieDBService);
     function movieDBService($http) {
+
+
         this.createMovie=createMovie;
         this.getUserReviews=getUserReviews;
         this.reviewUpVote=reviewUpVote;
         this.reviewDownVote=reviewDownVote;
         this.createReview=createReview;
-        //this.updateReview=updateReview;
 
         function createMovie(newMovie) {
             var url="/api/movie";

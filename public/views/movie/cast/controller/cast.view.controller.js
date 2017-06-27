@@ -6,13 +6,14 @@
     function castPageController($location,$routeParams,castService,currentUser,userService) {
         var model= this;
         model.user=currentUser;
+        model.castId=$routeParams.castId;
+
         model.getcastDetails=getcastDetails;
         model.getCastRelatedMovie=getCastRelatedMovie;
         model.getMoviesForGenre=getMoviesForGenre;
         model.searchMovieTMDB=searchMovieTMDB;
         model.logout=logout;
 
-        model.castId=$routeParams.castId;
         function init() {
             getcastDetails(model.castId);
             getCastRelatedMovie(model.castId);
@@ -22,7 +23,6 @@
         function getcastDetails(castId) {
             castService.getCastDetails(castId)
                 .then(function (response) {
-                    //console.log(response);
                    model.cast=angular.copy(response);
                 });
         }
@@ -31,7 +31,6 @@
         function getCastRelatedMovie(castId) {
             castService.getCastRelatedMovie(castId)
                 .then(function (response) {
-                    //console.log(response.cast);
                     model.relatedMovie=angular.copy(response.cast);
                 });
         }

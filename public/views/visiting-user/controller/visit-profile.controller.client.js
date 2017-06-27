@@ -7,6 +7,8 @@
         var model = this;
         model.userId =currentUser._id; //$routeParams['userId'];
         model.vUserId=$routeParams.userId;
+
+        // available functions
         model.logout=logout;
         model.searchMovieTMDB=searchMovieTMDB;
         model.getReviewsForUser=getReviewsForUser;
@@ -17,7 +19,7 @@
         model.getProfile=getProfile;
         model.getFollowingVisitUser=getFollowingVisitUser;
 
-
+        //init functions
         function init() {
             renderUser(model.vUserId);
             getReviewsForUser(model.vUserId);
@@ -25,9 +27,6 @@
             getFollowing(model.vUserId);
         }
         init();
-        // userService
-        //         .findUserById(model.userid)
-        //         .then(renderUser,userError);
 
         function renderUser(userId) {
             userService.findUserById(userId)
@@ -48,17 +47,14 @@
                         getReviewsForUser(model.vUserId);
                     },
                     function (response) {
-                        //console.log(response);
                     });
         }
         function reviewUpVote(reviewId) {
-            //console.log(reviewId);
             movieDBService.reviewUpVote(reviewId,model.user._id)
                 .then(function(response){
                         getReviewsForUser(model.vUserId);
                     },
                     function (response) {
-                        //console.log(response);
                     });
         }
 
@@ -73,10 +69,7 @@
 
         }
         function checkifFollow(userId,arr){
-            //console.log("___checkIfFollow___");
-            //console.log(arr);
             for (var v in arr){
-                //console.log(model.Followers);
                 if (userId===arr[v]._id){
                     return true;
                 }
@@ -84,30 +77,23 @@
             return "";
         }
         function getFollowing(userId) {
-            //console.log(userId);
             DBService.getFollowing(userId)
                 .then(function (response) {
-                    //console.log("____is following___");
                     model.Following=angular.copy(response.following);
                     getFollowingVisitUser(model.userId);
-                    //console.log(model.isfollow);
                 });
         }
         function getFollowingVisitUser(userId) {
             DBService.getFollowing(userId)
                 .then(function (response) {
-                    //console.log(response);
                     model.isfollow=checkifFollow(model.vUserId,response.following);
-                    //console.log(model.isfollow);
                 });
         }
 
 
         function followUser(){
-            //console.log(model.userId,model.vUserId);
             DBService.followUser(model.userId,model.vUserId)
                 .then(function (response) {
-                    //console.log(response);
                     init();
                 });
         }

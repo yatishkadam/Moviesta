@@ -5,6 +5,7 @@
 
 
     function castService($http) {
+
         this.getCastDetails = getCastDetails;
         this.getCastRelatedMovie=getCastRelatedMovie;
 

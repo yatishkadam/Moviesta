@@ -4,6 +4,8 @@
         .service("adminService", adminService);
 
     function adminService($http) {
+
+
         this.getAllUsers=getAllUsers;
         this.getUserByid=getUserByid;
         this.updateProfile=updateProfile;

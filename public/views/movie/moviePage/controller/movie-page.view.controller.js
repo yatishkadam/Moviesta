@@ -3,10 +3,12 @@
        .module("Moviesta")
        .controller('moviePageController',moviePageController);
 
-   function moviePageController($routeParams,$location,$mdDialog,movieService,movieDBService,currentUser,userService) {
+   function moviePageController($routeParams,$location,$mdDialog,movieService,hmovieDBService,currentUser,userService) {
       var model =this;
       model.user=currentUser;
-      //console.log(model.user);
+       model.movieId=$routeParams.movieId;
+
+
       model.getMoviesForGenre=getMoviesForGenre;
       model.getMovieDetails=getMovieDetails;
       model.searchMovieTMDB=searchMovieTMDB;
@@ -19,7 +21,9 @@
       model.createReview=createReview;
       model.getProfile=getProfile;
       model.checkifCurrentUser=checkifCurrentUser;
-      model.movieId=$routeParams.movieId;
+
+
+
       function init() {
           getMovieDetails(model.movieId);
           getTMDBRelatedMovies(model.movieId);
@@ -79,9 +83,8 @@
               });
        }
 
-
        function getUserReviews(movieId) {
-           model.criticReviews=[];
+          model.criticReviews=[];
            movieDBService.getUserReviews(movieId)
                .then(function (response) {
                    //console.log(response);

@@ -6,6 +6,8 @@
     function movieSearchController($location,movieService,$routeParams,currentUser,userService) {
         var model =this;
         model.user=currentUser;
+
+
         model.findMovieTMDB=findMovieTMDB;
         model.searchMovieTMDB=searchMovieTMDB;
         model.logout=logout;

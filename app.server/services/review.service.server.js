@@ -18,13 +18,7 @@ app.put   ("/api/:userId/review/downvote/:reviewId",downVote);
 
 //create review
 function createReview(req,res) {
-    //console.log("________inside create review_______");
     var review=req.body;
-    //console.log(review);
-    //console.log(review.userId);
-    //console.log(review.movieId);
-    //console.log("review->>\n");
-    //console.log(review);
     reviewModel.createReview(review)
         .then(function (response) {
             //console.log(response);

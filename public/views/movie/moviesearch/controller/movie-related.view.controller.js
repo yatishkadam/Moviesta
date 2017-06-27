@@ -5,11 +5,13 @@
 
     function relatedMovieController($location,movieService,$routeParams,currentUser,userService) {
         var model = this;
+
         model.user=currentUser;
         model.getMoviesForGenre=getMoviesForGenre;
         model.searchMovieTMDB=searchMovieTMDB;
         model.getTMDBRelatedMovies=getTMDBRelatedMovies;
         model.logout=logout;
+
         function init() {
             model.title = "Related Movies";
             model.movieId = $routeParams['movieId'];

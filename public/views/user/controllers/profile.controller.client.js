@@ -6,7 +6,9 @@
     function profileController($location,userService,currentUser,DBService,movieDBService,adminService) {
         var model = this;
         model.user=currentUser;
-        model.userId =currentUser._id; //$routeParams['userId'];
+        model.userId =currentUser._id;
+
+
         model.updateUser=updateUser;
         model.unregister=deleteUser;
         model.logout=logout;
@@ -31,9 +33,6 @@
             getAllReviews();
         }
         init();
-        // userService
-        //         .findUserById(model.userid)
-        //         .then(renderUser,userError);
 
         function renderUser(user) {
             model.user=angular.copy(user);

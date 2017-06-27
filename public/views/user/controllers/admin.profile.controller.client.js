@@ -6,6 +6,8 @@
     function adminprofileController($location,$mdDialog,userService,currentUser,DBService,movieDBService,adminService) {
         var model = this;
         model.user =currentUser; //$routeParams['userId'];
+
+
         model.getUserByid=getUserByid;
         model.logout=logout;
         model.updateProfile=updateProfile;
@@ -17,6 +19,8 @@
         model.reviewDelete=reviewDelete;
         model.getAllFollow=getAllFollow;
         model.deleteFollow=deleteFollow;
+
+
         function init() {
             getAllUsers();
             getAllReviews();
@@ -42,7 +46,6 @@
             //console.log(userId);
             adminService.getUserByid(userId)
                 .then(function (user) {
-                    //console.log(user);
                     model.editUser=angular.copy(user);
                 });
         }
@@ -109,9 +112,6 @@
         }
         model.showAlert = function(ev) {
             model.error=false;
-            // Appending dialog to document.body to cover sidenav in docs app
-            // Modal dialogs should fully cover application
-            // to prevent interaction outside of dialog
             $mdDialog.show(
                 $mdDialog.alert()
                     .parent(angular.element(document.querySelector('#popupContainer')))
@@ -144,12 +144,9 @@
         }
 
         function getAllFollow() {
-            //console.log("__getAllFollows__");
          adminService.getAllFollows()
              .then(function (follows) {
                  model.follows=angular.copy(follows);
-             //console.log(follows);
-
          });
         }
         function deleteFollow(followId) {

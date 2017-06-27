@@ -3,6 +3,7 @@
         .service("userService",userService);
 
     function userService($http) {
+
         this.register = register;
         this.findUserByUsername = findUserByUsername;
         this.login=login;
@@ -16,7 +17,7 @@
         this.checkAdmin=checkAdmin;
         this.passwordUpdate=passwordUpdate;
 
-            //funtion to register user
+        //funtion to register user
         function register(user) {
             var url = "/api/register";
             return $http.post(url, user)
