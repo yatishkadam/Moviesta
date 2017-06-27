@@ -40,6 +40,14 @@
                     currentUser:checkLoggedIn
                 }
             })
+            .when('/admin',{
+            templateUrl : 'views/user/admin-profile.view.client.html',
+            controller  : 'adminprofileController',
+            controllerAs: 'model',
+            resolve:{
+                currentUser:checkAdmin
+            }
+            })
             .when('/movies/:movieId',{
                 templateUrl :'views/movie/moviePage/movie-page.view.client.html',
                 controller  :'moviePageController',
@@ -118,6 +126,21 @@
                     }
                     else{
                         deferred.resolve(user);
+                    }
+                });
+            return deferred.promise;
+        }
+
+        function checkAdmin($q, $location, userService) {
+            var deferred = $q.defer();
+            userService
+                .checkAdmin()
+                .then(function (currentUser) {
+                    if(currentUser === '0') {
+                        deferred.resolve({});
+                        $location.url('/');
+                    } else {
+                        deferred.resolve(currentUser);
                     }
                 });
             return deferred.promise;

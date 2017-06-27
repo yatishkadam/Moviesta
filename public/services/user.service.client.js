@@ -13,6 +13,7 @@
         this.createUser=createUser;
         this.findUserById=findUserById;
         this.updateUser=updateUser;
+        this.checkAdmin=checkAdmin;
 
             //funtion to register user
         function register(user) {
@@ -122,6 +123,14 @@
                 return response.data;
             }
         }
+
+        function checkAdmin() {
+                var url = "/api/checkAdmin";
+                return $http.get(url)
+                    .then(function (response) {
+                        return response.data;
+                    });
+            }
     }
 
 })();

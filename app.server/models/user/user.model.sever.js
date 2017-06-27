@@ -71,8 +71,6 @@ function findAllUser() {
 
 // update user
 function updateUser(userId,newUser) {
-    delete newUser.username;
-    delete newUser.password;
     return userModel.update({_id:userId},{$set:newUser});
 }
 
@@ -96,12 +94,7 @@ function deleteUser(userId) {
                 .then(function (user) {
                     console.log("inside delete user item=");
                     console.log(user);
-                    user.reviews.forEach(function (item) {
-                        console.log("inside delete user item=");
-                        console.log(item);
-                      reviewModel.deleteReview(item);
-                      return userModel.remove({_id: user._id});
-                    });
+                    return userModel.remove({_id: user._id});
                     //console.log(user);
 
                 });

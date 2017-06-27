@@ -1,0 +1,160 @@
+<nav class="navbar navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#!/">
+                <span class="glyphicon glyphicon-home"></span></a>
+            <div class="navbar-brand text-center" style="margin-left: 30px"> Admin Page</div>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-show="model.user._id" href="#!/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                <li><a ng-show="model.user._id" ng-click="model.logout()"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-9 col-sm-9 col-lg-offset-2 ">
+        <div ng-cloak>
+            <md-content>
+                <md-tabs md-dynamic-height md-border-bottom>
+                    <md-tab label="USERS">
+                        <md-content class="md-padding">
+                            <div ng-repeat="user in model.allUsers">
+                                <div class="row">
+                                    <a class="btn btn-sm btn-primary  pull-right"
+                                       ng-click="model.getUserByid(user._id)" data-toggle="modal" data-target="#edituser"> Edit</a>
+                                    <div class="avatar1 pull-left">
+                                        <img ng-show="user.url" ng-src="{{user.url}}" src="{{user.url}}">
+                                        <img ng-show="!user.url" ng-src="./images/loginhead.jpg" src="./images/loginhead.jpg">
+                                    </div>
+                                    <h4 class="pull-left">
+                                        <a ng-click="model.getProfile(user._id)" class="btn btn-link"> {{user.username}}</a>
+                                    </h4>
+                                </div>
+                                <hr>
+                            </div>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Following">
+                        <md-content class="md-padding">
+                            <div ng-show="!model.Following"><h2>No follows Yet!</h2></div>
+                            <div ng-repeat="user in model.Following">
+                                <div class="row">
+                                <a ng-click="model.unFollow(user._id)" class="btn btn-sm btn-danger  pull-right">unfollow</a>
+                                <div class="avatar1 pull-left">
+                                    <img ng-show="user.url" ng-src="{{user.url}}" src="{{user.url}}">
+                                    <img ng-show="!user.url" ng-src="./images/loginhead.jpg" src="./images/loginhead.jpg">
+                                </div>
+                                <h4 class="pull-left">
+                                    <a href="#!/profile/{{user._id}}" class="btn btn-link"> {{user.username}}</a>
+                                </h4>
+                                </div>
+                                <hr>
+                            </div>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="All Reviews">
+                        <div ng-show="!model.allReviews"><h2>No reviews !</h2></div>
+                        <md-content class="md-padding">
+                            <div ng-repeat="review in model.allReviews">
+                                <a ng-click="model.reviewDelete(review._id)" class="btn btn-danger btn-sm pull-right" style="margin-left: 4px">
+                                    <i class="fa fa-trash " aria-hidden="true"></i>
+                                </a>
+                                <a ng-click="model.getReviewById(review._id)" data-toggle="modal" data-target="#editReview" class="btn btn-primary btn-sm pull-right" style="margin-left: 4px">
+                                    <i class="fa fa-pencil " aria-hidden="true"></i>
+                                </a>
+                                <h4>Movie :
+                                    <a href="#!/movies/{{review.tmdbMovieId}}" class="btn btn-link"> {{review.movieName}}</a>
+                                    Author :<a ng-click="model.getProfile(review._userId)" class="btn btn-link"> {{review.author}}</a>
+                                    <a ng-click="model.reviewDownVote(review._id)">
+                                        <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.downVotes.length}}</i>
+                                    </a>
+                                    <a ng-click="model.reviewUpVote(review._id)">
+                                        <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.upVotes.length}}</i>
+                                    </a>
+                                </h4>
+                                <h4>Content :</h4> <p>{{review.content}}</p>
+                                <hr>
+                            </div>
+
+                        </md-content>
+                    </md-tab>
+
+                </md-tabs>
+            </md-content>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="edituser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Edit User Profile</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <label  for="username">Username</label>
+                            <input  ng-model="model.editUser.username" type="text" class="form-control" id="username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <label  for="username">Roles</label>
+                            <input ng-model="model.editUser.roles" type="text" class="form-control" id="roles" placeholder="Username">
+                        </div>
+                        <div >
+                            <label for="email">Email address</label>
+                            <input ng-model="model.editUser.email" type="email" class="form-control" id="email" placeholder="alice@wonderland.com">
+                        </div>
+                        <div >
+                            <label for="first-name">First Name</label>
+                            <input ng-model="model.editUser.firstName" type="text" class="form-control" id="first-name" placeholder="Alice">
+                        </div>
+                        <div >
+                            <label for="last-name">Last Name</label>
+                            <input ng-model="model.editUser.lastName" type="text" class="form-control" id="last-name" placeholder="Wonderland">
+                        </div>
+                        <a ng-click="model.updateProfile(model.editUser._id ,model.editUser)"data-dismiss="modal" class="btn btn-success btn-block">Save Changes</a>
+                        <a ng-if="(model.editUser._id!=model.user._id)"ng-click="model.deleteProfile(model.editUser._id)" data-dismiss="modal" class="btn btn-danger btn-block" href="">Delete Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editReview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="#myModalLabel">Edit Review</h4>
+            </div>
+            <div class="modal-body">
+                <textarea ng-model="model.reviewForUpdate.content" class="form-control" style="min-width: 100%">
+                </textarea>
+            </div>
+            <div class="modal-footer">
+                <button ng-click="model.reviewUpdate(model.reviewForUpdate._id,model.reviewForUpdate)" type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

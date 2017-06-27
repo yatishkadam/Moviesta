@@ -17,13 +17,14 @@ app.put    ("/api/user/:userId",updateUser);
 app.get    ("/api/user/:userId",findUserById);
 app.delete ("/api/user/:userId",deleteUser);
 app.get    ("/api/loggedin",loggedin);
+app.get    ("/api/checkAdmin",checkAdmin);
 app.post   ("/api/logout",logout);
 app.post   ("/api/user/login", passport.authenticate('local'),login);
 app.post   ("/api/register",register);
 app.get    ("/auth/google",passport.authenticate('google',{scope:['profile','email']}));
 
 app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-
+app.get ('/api/getallusers',findAllUser);
 
 app.get('/auth/google/callback',
     passport.authenticate('google', {
@@ -183,6 +184,15 @@ function loggedin(req, res) {
         res.send('0');
     }
 }
+function checkAdmin(req, res) {
+    //console.log(req.user);
+    if(req.isAuthenticated() && (req.user.roles.indexOf('ADMIN') >-1)) {
+        res.json(req.user);
+    } else {
+        //res.redirect("/login");
+        res.send('0');
+    }
+}
 
 //function to create user
 function createUser(req,res) {
@@ -301,4 +311,17 @@ function deserializeUser(user, done) {
                 done(err, null);
             }
         );
+}
+
+
+
+function findAllUser(req,res) {
+    userModel
+        .findAllUser()
+        .then(function (users) {
+            res.json(users);
+        },
+        function (err) {
+            res.sendStatus(404);
+        });
 }

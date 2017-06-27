@@ -139,8 +139,8 @@
        }
 
        function getProfile(userId) {
-          console.log(userId);
-          console.log(model.user._id);
+          //console.log(userId);
+          //console.log(model.user._id);
            if(userId===model.user._id){
                $location.url("/profile");
            }
