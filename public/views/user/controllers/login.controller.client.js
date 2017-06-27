@@ -16,7 +16,7 @@
                                     model.message = "Wrong username or password.";
                                 }
                                 else {
-                                    $location.url("/profile");
+                                    $location.url("/");
                                 }
                             }, function (err) {
                                 model.message = "Wrong username or password.";
