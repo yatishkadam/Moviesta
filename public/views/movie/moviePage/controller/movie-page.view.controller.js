@@ -118,24 +118,28 @@
                    });
        }
        function createReview(review) {
-           review.tmdbMovieId=model.movieId;
-           review.author=model.user.firstName;
-           review._userId=model.user._id;
-           review.movieName=model.movie.title;
-           if (model.user.roles.indexOf("CRITIC")>-1)
-           {
-               review.authorRole='CRITIC';
+           if(typeof review==="undefined" || ""){
            }
-           else
-           {
-               review.authorRole='USER';
+           else {
+               review.tmdbMovieId=model.movieId;
+               review.author=model.user.firstName;
+               review._userId=model.user._id;
+               review.movieName=model.movie.title;
+               if (model.user.roles.indexOf("CRITIC")>-1)
+               {
+                   review.authorRole='CRITIC';
+               }
+               else
+               {
+                   review.authorRole='USER';
+               }
+               review._movieId=model.movie._id;
+               movieDBService.createReview(review)
+                   .then(function (response) {
+                       model.newReview.content='';
+                       getUserReviews(model.movieId);
+                   });
            }
-           review._movieId=model.movie._id;
-           movieDBService.createReview(review)
-               .then(function (response) {
-                   model.newReview.content='';
-                   getUserReviews(model.movieId);
-               });
 
        }
 

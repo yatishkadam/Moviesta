@@ -145,7 +145,8 @@
                 <hr class="colorgraph">
                 <div class="container-fluid">
                     <h6 ng-show="!model.user._id">Login to review</h6>
-                    <textarea class="col-xs-12" rows="6" ng-disabled="!model.user._id" ng-model="model.newReview.content">
+                    <h6 ng-show="model.reviewmessage">{{model.reviewmessage}}</h6>
+                    <textarea class="col-xs-12" rows="6" ng-disabled="!model.user._id" ng-model="model.newReview.content" >
                 </textarea>
                     <button ng-click="model.createReview(model.newReview)" class="btn btn-primary btn-block btn-sm" ng-disabled="!model.user._id">Submit Review</button>
                 </div>
