@@ -1,4 +1,4 @@
-# Web-Dev-Project
+# Moviesta
 ## How to run
 ### command prompt
     1. git clone https://github.com/yatishkadam/WebDevProject.git
